@@ -6,8 +6,8 @@ export default function Root() {
 	return (
 		<>
 			<Header />
-			<div className='grid grid-cols-12'>
-				<div className='col-span-3 bg-blue drop-shadow-card'>
+			<div className='grid grid-cols-12 bg-red-text min-h-screen'>
+				<div className='col-span-3 drop-shadow-card'>
 					<Sidebar />
 				</div>
 
