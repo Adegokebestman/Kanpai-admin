@@ -32,10 +32,6 @@ export default {
 				card: '-2px 9px 45px rgba(0, 0, 0, 0.07)',
 				default: '0px 4px 40px rgba(0, 0, 0, 0.19)',
 			},
-			fontFamily: {
-				poppins: ['Poppins', 'sans-serif'],
-				rubik: ['Rubik', 'sans - serif'],
-			},
 		},
 	},
 	plugins: [],
