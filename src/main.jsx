@@ -20,9 +20,9 @@ const router = createBrowserRouter(
 			<Route path='/' element={<Root />}>
 				<Route index element={<App />} />
 			</Route>
-			<Route element={<Authentication />}>
-				<Route path='/login' element={<Login />} />
-				<Route path='/register' element={<Register />} />
+			<Route path='auth' element={<Authentication />}>
+				<Route path='login' element={<Login />} />
+				<Route path='otp_verification' element={<Register />} />
 			</Route>
 		</Route>
 	)
