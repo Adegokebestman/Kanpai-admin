@@ -5,13 +5,16 @@ import Sidebar from '../components/Sidebar';
 export default function Root() {
 	return (
 		<>
-			<Header />
-			<div className='grid grid-cols-12 bg-red-text min-h-screen'>
-				<div className='col-span-3 drop-shadow-card'>
+			<div className='grid grid-cols-12 min-h-screen'>
+				<div className='hidden lg:block col-span-3'>
 					<Sidebar />
 				</div>
 
-				<main id='content' className='col-span-9 bg-gray-400'>
+				<main
+					id='content'
+					className='col-span-12 lg:col-span-9 flex flex-col gap-5 justify-normal'
+				>
+					<Header />
 					<Outlet />
 				</main>
 			</div>
