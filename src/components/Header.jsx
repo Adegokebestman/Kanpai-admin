@@ -5,10 +5,10 @@ const Header = () => {
 		<header className='min-h-[80px] max-h[120px] shadow-md py-6'>
 			<div className='flex items-center justify-between px-5 sm:px-10 lg:px-14'>
 				<div>
-					<h2 className='font-bold text-lg sm:text-xl capitalize'>
-						Hello Admin
+					<h2 className='font-[500] text-lg sm:text-2xl capitalize'>
+						Hello Admin,
 					</h2>
-					<p className='text-sm lg:text-base hidden lg:block'>
+					<p className='text-sm lg:text-base hidden text-gray-400 lg:block'>
 						Welcome to your dashboard
 					</p>
 				</div>
@@ -16,16 +16,16 @@ const Header = () => {
 					<aside className='flex items-center justify-evenly '>
 						<div className='h-10 w-10 bg-green-bg rounded-full border border-blue overflow-hidden'>
 							<img
-								src=''
+								src='https://source.unsplash.com/100x100/?portrait'
 								alt='profile image of user'
 								className='w-full h-full'
 							/>
 						</div>
-						<div className='flex-col items-start justify-between hidden sm:flex'>
-							<h4 className='font-semibold capitalize text-sm sm:text-lg'>
+						<div className='flex-col pl-3 items-start justify-between hidden sm:flex'>
+							<h4 className='font-semibold text-gray-500 capitalize leading-4 text-sm sm:text-sm'>
 								User Name
 							</h4>
-							<p className='text-gray-300 capitalize text-sm lg:text-base'>
+							<p className='text-gray-300 capitalize font-medium text-sm lg:text-sm'>
 								Admin
 							</p>
 						</div>
