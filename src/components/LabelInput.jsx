@@ -11,10 +11,12 @@ const LabelInput = ({
 		<>
 			<label htmlFor={name}>{label}</label>
 			<input
-				className={classNames}
+				autoComplete={type == 'email' ? 'username' : 'current-password'}
+				required
 				type={type ?? 'text'}
 				name={name}
 				placeholder={placeholder ?? 'enter text'}
+				className={classNames}
 				onChange={onChange}
 			/>
 		</>

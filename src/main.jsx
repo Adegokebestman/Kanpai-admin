@@ -7,12 +7,14 @@ import {
 	RouterProvider,
 } from 'react-router-dom';
 import './index.css';
-import Root from './layouts/Root.jsx';
 import ErrorPage from './error-page';
 import App from './App';
+
+import Root from './layouts/Root.jsx';
 import Authentication from './layouts/Authentication';
+
 import Login from './pages/Login';
-import Register from './pages/Register';
+import Otp_Verification from './pages/Otp_Verification';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -21,8 +23,8 @@ const router = createBrowserRouter(
 				<Route index element={<App />} />
 			</Route>
 			<Route path='auth' element={<Authentication />}>
-				<Route path='login' element={<Login />} />
-				<Route path='otp_verification' element={<Register />} />
+				<Route index element={<Login />} />
+				<Route path='otp_verification' element={<Otp_Verification />} />
 			</Route>
 		</Route>
 	)
