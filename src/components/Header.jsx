@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import NotificationIcon from './icons/notificationIcon.svg?component';
 
-const Header = () => {
+const Header = ({ setShowSidebar }) => {
 	return (
 		<header className='min-h-[80px] max-h[120px] shadow-md py-6'>
 			<div className='flex items-center justify-between px-5 sm:px-10 lg:px-14'>
@@ -32,6 +33,12 @@ const Header = () => {
 					</aside>
 					<span className='rounded-full bg-gray-100 p-2 flex items-center justify-center cursor-pointer'>
 						<NotificationIcon />
+					</span>
+					<span
+						className='lg:hidden rounded-full bg-gray-100 p-2 flex items-center justify-center cursor-pointer'
+						onClick={() => setShowSidebar((prev) => !prev)}
+					>
+						B
 					</span>
 				</div>
 			</div>
