@@ -21,7 +21,7 @@ const ProductReportProductContainer = ({
 				</div>
 
 				<aside className='sm:flex sm:justify-between gap-5'>
-					<div className='text-gray-600'>
+					<div className='text-gray-700'>
 						<h3 className='font-bold text-lg sm:text-3xl capitalize whitespace-break-spaces'>
 							{productName}
 						</h3>
@@ -29,7 +29,7 @@ const ProductReportProductContainer = ({
 							Available: {productAvailability ?? 0}
 						</p>
 					</div>
-					<h2 className='font-bold text-xl sm:text-3xl text-gray-600'>
+					<h2 className='font-bold text-xl sm:text-3xl text-gray-700'>
 						${productPrice}
 					</h2>
 				</aside>
