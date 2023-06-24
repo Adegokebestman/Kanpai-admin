@@ -32,7 +32,7 @@ export default function Root() {
 				<div
 					className={`${
 						showSidebar
-							? 'absolute top-0 left-0 bg-white z-10'
+							? 'absolute top-0 left-0 bg-white z-10 bottom-0'
 							: 'hidden col-span-2 '
 					} lg:block`}
 				>
