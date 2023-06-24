@@ -11,7 +11,7 @@ const Sidebar = () => {
 	// }
 
 	return (
-		<section className='shadow-lg min-h-full space-y-16 py-8'>
+		<section className='shadow-lg min-h-screen fixed bg-white space-y-16 py-8'>
 			<KanpaiLogo className='mx-auto' />
 
 			<ul className='flex flex-col justify-start gap-6 px-4'>
