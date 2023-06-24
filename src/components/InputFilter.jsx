@@ -45,11 +45,11 @@ const FilterComponent = () => {
 				Sort By
 			</h3>
 			<li className='whitespace-nowrap py-3 text-xs sm:text-sm'>
-				<input type='radio' name='pending' className='mr-2' />
+				<input type='checkbox' name='pending' className='mr-2' />
 				Pending Order
 			</li>
 			<li className='whitespace-nowrap py-3 text-xs sm:text-sm'>
-				<input type='radio' name='delivered' className='mr-2' />
+				<input type='checkbox' name='delivered' className='mr-2' />
 				Delivered Order
 			</li>
 		</ul>
