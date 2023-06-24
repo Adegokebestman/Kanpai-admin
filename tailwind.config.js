@@ -17,6 +17,7 @@ export default {
 					300: '#B3B3B3',
 					400: '#808080',
 					500: '#4C4C4C',
+					600: '#F6F6F6',
 					overlay: '#8784848a',
 				},
 				green: {
@@ -28,6 +29,8 @@ export default {
 					fade: '#f9d7bf45',
 					bg: '#fd88885e',
 					text: '#EB001B',
+					200: '#FF0000',
+					300: '#FD88885E'
 				},
 			},
 			dropShadow: {

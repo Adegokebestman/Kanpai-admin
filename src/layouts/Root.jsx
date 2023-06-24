@@ -41,12 +41,12 @@ export default function Root() {
 
 				<main
 					id='content'
-					className={`col-span-12 lg:col-span-10 flex flex-col gap-5 justify-normal ${
+					className={`col-span-12 lg:col-span-10 flex flex-col md:gap-5 justify-normal ${
 						showSidebar ? 'z-0' : ''
 					}`}
 				>
 					<Header setShowSidebar={setShowSidebar} />
-					<section className='py-4 px-5'>
+					<section className='md:py-4 md:px-5'>
 						<Outlet />
 					</section>
 				</main>
