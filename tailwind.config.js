@@ -12,12 +12,13 @@ export default {
 				black: ' #19191A',
 				white: '#ffffff',
 				gray: {
-					100: '#F9F7F7',
+					100: '#F9F8F8',
 					200: '#D5D3D2',
 					300: '#B3B3B3',
 					400: '#808080',
 					500: '#4C4C4C',
 					600: '#F6F6F6',
+					700: '#5B5856',
 					overlay: '#8784848a',
 				},
 				green: {
@@ -30,7 +31,8 @@ export default {
 					bg: '#fd88885e',
 					text: '#EB001B',
 					200: '#FF0000',
-					300: '#FD88885E'
+					300: '#FD88885E',
+					box: '#EF3838',
 				},
 			},
 			dropShadow: {

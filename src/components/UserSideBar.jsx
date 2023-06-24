@@ -20,23 +20,28 @@ const UserSideBar = () => {
 				Users
 				<ArrowDown />
 			</li>
-			{open && (
-				<ul className='bg-gray-100 -mt-4 rounded-xl overflow-hidden block'>
-					{usersLinks.map((user) => (
-						<NavLink
-							key={user.link}
-							to={user.link}
-							className={({ isActive }) =>
-								isActive ? 'bg-gray-300' : ''
-							}
-						>
-							<li className='hover:bg-gray-300 p-2 w-full hover:pl-3 transition-all ease-linear'>
-								{user.title}
-							</li>
-						</NavLink>
-					))}
-				</ul>
-			)}
+
+			<ul
+				className={`${
+					open
+						? 'flex flex-col transition-[display] ease-linear bg-gray-100 -mt-4 rounded-xl overflow-hidden'
+						: 'hidden'
+				}`}
+			>
+				{usersLinks.map((user) => (
+					<NavLink
+						key={user.link}
+						to={user.link}
+						className={({ isActive }) =>
+							isActive ? 'bg-gray-300' : ''
+						}
+					>
+						<li className='hover:bg-gray-300 p-2 w-full hover:pl-3 transition-all ease-linear'>
+							{user.title}
+						</li>
+					</NavLink>
+				))}
+			</ul>
 		</>
 	);
 };
