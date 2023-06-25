@@ -12,71 +12,7 @@ const Dashboard = () => {
 				<InfoStats rate={22} title='truck drivers' />
 			</div>
 			{/* Chartjs */}
-			<div className='border-2 rounded-xl border-gray-400 mx-auto w-[90%]'>
-				<div className='flex justify-between items-center p-4 sm:p-10'>
-					<p className='text-xl font-medium'>Analytics</p>
-
-					<div className='relative bg-gray-600 p-2 '>
-						<input
-							type='checkbox'
-							id='sortbox'
-							className='hidden absolute'
-						/>
-						<label
-							htmlFor='sortbox'
-							className='flex items-center space-x-1 cursor-pointer'
-						>
-							<span className='text-lg text-primary-700'>
-								Sort By
-							</span>
-							<svg
-								className='h-4 w-4 text-primary-700'
-								xmlns='http://www.w3.org/2000/svg'
-								fill='none'
-								viewBox='0 0 24 24'
-								stroke='currentColor'
-							>
-								<path d='M19 9l-7 7-7-7' />
-							</svg>
-						</label>
-
-						<div
-							id='sortboxmenu'
-							className='absolute right-1 top-full min-w-max shadow rounded opacity-0 bg-gray-600 border border-gray-400 transition delay-75 ease-in-out z-10'
-						>
-							<ul className='block text-right text-gray-900'>
-								<li>
-									<a
-										href='#'
-										className='block px-3 py-2 hover:bg-gray-200'
-									>
-										Month
-									</a>
-								</li>
-								<li>
-									<a
-										href='#'
-										className='block px-3 py-2 hover:bg-gray-200'
-									>
-										Day
-									</a>
-								</li>
-								<li>
-									<a
-										href='#'
-										className='block px-3 py-2 hover:bg-gray-200'
-									>
-										Week
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div className=' w-full md:h-[500px] flex md:justify-center justify-end mb-4'>
-					<LineChart />
-				</div>
-			</div>
+			<LineChart />
 			{/* Recent activities */}
 			<div className='border-2 py-4 lg:py-6 px-3 rounded-xl border-gray-400 w-[95%] mx-auto'>
 				<InputFilter />
@@ -158,18 +94,18 @@ const TableData = () => {
 				</div>
 			</td>
 			<td className='p-2 whitespace-nowrap'>
-				<div className='font-medium text-gray-800'>Alex Shatov</div>
+				<div className='font-bold '>Alex Shatov</div>
 			</td>
 			<td className='p-2 whitespace-nowrap'>
-				<div className='text-left'>alexshatov@gmail.com</div>
+				<div className='text-left font-bold'>alexshatov@gmail.com</div>
 			</td>
 			<td className='p-2 whitespace-nowrap'>
-				<div className='text-lg text-left'>12/06/2023</div>
+				<div className=' text-left font-bold'>12/06/2023</div>
 			</td>
 			<td className='p-2 whitespace-nowrap'>
-				<div className=' text-center bg-red-300 py-2 rounded-full'>
-					<p className='text-red-200 md:text-lg'>Flagged</p>
-				</div>
+				<button className=' bg-red-bg text-red-text px-3 py-2 rounded-full font-medium'>
+					Flagged
+				</button>
 			</td>
 		</tr>
 	);

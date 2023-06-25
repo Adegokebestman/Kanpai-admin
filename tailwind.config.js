@@ -19,6 +19,7 @@ export default {
 					500: '#4C4C4C',
 					600: '#F6F6F6',
 					700: '#5B5856',
+					800: '#E7E7E7',
 					overlay: '#8784848a',
 				},
 				green: {

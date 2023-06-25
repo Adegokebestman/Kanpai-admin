@@ -67,7 +67,69 @@ const LineChart = () => {
         {/* Buttons for selecting data */}
       </div>
 
-      {chartData ? (
+      <div className='border-2 rounded-xl border-gray-400 mx-auto w-[95%]'>
+				<div className='flex justify-between items-center p-4 sm:p-10'>
+					<p className='text-xl font-medium'>Analytics</p>
+
+					<div className='relative bg-gray-600 p-2 '>
+						<input
+							type='checkbox'
+							id='sortbox'
+							className='hidden absolute'
+						/>
+						<label
+							htmlFor='sortbox'
+							className='flex items-center space-x-1 cursor-pointer'
+						>
+							<span className='text-lg text-primary-700'>
+								Sort By
+							</span>
+							<svg
+								className='h-4 w-4 text-primary-700'
+								xmlns='http://www.w3.org/2000/svg'
+								fill='none'
+								viewBox='0 0 24 24'
+								stroke='currentColor'
+							>
+								<path d='M19 9l-7 7-7-7' />
+							</svg>
+						</label>
+
+						<div
+							id='sortboxmenu'
+							className='absolute right-1 top-full min-w-max shadow rounded opacity-0 bg-gray-600 border border-gray-400 transition delay-75 ease-in-out z-10'
+						>
+							<ul className='block text-right text-gray-900'>
+								<li>
+									<a
+										href='#'
+										className='block px-3 py-2 hover:bg-gray-200'
+									>
+										Month
+									</a>
+								</li>
+								<li>
+									<a
+										href='#'
+										className='block px-3 py-2 hover:bg-gray-200'
+									>
+										Day
+									</a>
+								</li>
+								<li>
+									<a
+										href='#'
+										className='block px-3 py-2 hover:bg-gray-200'
+									>
+										Week
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div className=' w-full md:h-[500px] flex md:justify-center justify-end mb-4'>
+        {chartData ? (
         <Line
           options={options}
           data={{
@@ -88,6 +150,10 @@ const LineChart = () => {
       ) : (
         <p>Loading chart data...</p>
       )}
+				</div>
+			</div>
+
+
     </>
   );
 };
