@@ -40,3 +40,7 @@
 	src: url('/Rubik.ttf');
 	font-weight: 300;
 }
+
+#sortbox:checked ~ #sortboxmenu {
+	opacity: 1;
+}
