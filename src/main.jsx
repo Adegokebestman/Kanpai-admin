@@ -6,6 +6,9 @@ import {
 	Route,
 	RouterProvider,
 } from 'react-router-dom';
+
+import Modal from 'react-modal';
+
 import './index.css';
 import ErrorPage from './error-page';
 
@@ -59,6 +62,8 @@ const router = createBrowserRouter(
 		</Route>
 	)
 );
+
+Modal.setAppElement('#root');
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>

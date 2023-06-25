@@ -46,7 +46,7 @@ export default function Root() {
 					}`}
 				>
 					<Header setShowSidebar={setShowSidebar} />
-					<section className='md:py-4 md:px-5'>
+					<section className='p-3 md:py-4 md:px-5'>
 						<Outlet />
 					</section>
 				</main>
