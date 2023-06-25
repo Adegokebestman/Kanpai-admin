@@ -5,15 +5,35 @@ import ProductReportDetailHeader from '../components/ProductReportDetailHeader';
 import ProductReportProductContainer from '../components/ProductReportProductContainer';
 import TableComponent from '../components/TableComponent';
 import InputFilter from '../components/InputFilter';
+import GeneralModal from '../components/GeneralModal';
+import { useState } from 'react';
+import ModalDeleteProduct from '../components/ModalDeleteProduct';
+import ModalEditProduct from '../components/ModalEditProduct';
 
 const ProductReportDetail = () => {
+	const [openDelete, setOpenDelete] = useState(false);
+	const [isEdit, setIsEdit] = useState(false);
 	return (
 		<section className='space-y-6'>
 			<ProductReportDetailHeader />
+
 			<section className='overflow-hidden space-y-16 border border-gray-100 rounded-t-2xl pb-20'>
-				<ProductReportProductContainer />
+				<ProductReportProductContainer
+					openDelete={setOpenDelete}
+					openEdit={setIsEdit}
+				/>
+
 				<ProductReportComplaintContainer />
 				<InputFilter />
+
+				<GeneralModal isOpen={openDelete} setIsOpen={setOpenDelete}>
+					<ModalDeleteProduct setOpenDelete={setOpenDelete} />
+				</GeneralModal>
+
+				<GeneralModal isOpen={isEdit} setIsOpen={setIsEdit}>
+					<ModalEditProduct setOpenDelete={setIsEdit} />
+				</GeneralModal>
+
 				<TableComponent
 					columns={columns}
 					data={dataArray}

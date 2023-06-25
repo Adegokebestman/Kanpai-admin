@@ -8,6 +8,8 @@ const ProductReportProductContainer = ({
 	productImage = 'https://source.unsplash.com/400x400/?portrait',
 	productPrice = 200,
 	productAvailability = 90,
+	openDelete,
+	openEdit,
 }) => {
 	return (
 		<article className='flex flex-col sm:items-center sm:flex-row gap-4 sm:justify-between bg-gray-200 p-2 sm:p-3'>
@@ -36,8 +38,8 @@ const ProductReportProductContainer = ({
 			</div>
 
 			<aside className='flex items-center gap-10 self-center'>
-				<EditIcon />
-				<DeleteIcon />
+				<EditIcon onClick={() => openEdit(true)} />
+				<DeleteIcon onClick={() => openDelete(true)} />
 			</aside>
 		</article>
 	);
