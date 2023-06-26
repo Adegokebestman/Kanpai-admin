@@ -1,6 +1,8 @@
 import SearchIcon from './icons/searchIcon.svg?component';
 import FilterIcon from './icons/filterIcon.svg?component';
 import { useState } from 'react';
+import FilterComponent from './FilterComponent';
+import { filterProducts } from '../lib/utils';
 
 const InputFilter = () => {
 	const [showFilter, setShowFilter] = useState(false);
@@ -30,28 +32,17 @@ const InputFilter = () => {
 					>
 						<FilterIcon />
 					</div>
-					{showFilter && <FilterComponent />}
+					{showFilter && (
+						<FilterComponent
+							data={filterProducts}
+							title={'sort by'}
+							toggle={true}
+							left={false}
+						/>
+					)}
 				</div>
 			</aside>
 		</div>
 	);
 };
 export default InputFilter;
-
-const FilterComponent = () => {
-	return (
-		<ul className='absolute z-20 bg-white rounded-lg border border-gray-200 drop-shadow-2xl px-3 py-2 left-0  -translate-x-[100%] top-[100%] '>
-			<h3 className='font-bold text-sm sm:text-lg whitespace-nowrap'>
-				Sort By
-			</h3>
-			<li className='whitespace-nowrap py-3 text-xs sm:text-sm'>
-				<input type='checkbox' name='pending' className='mr-2' />
-				Pending Order
-			</li>
-			<li className='whitespace-nowrap py-3 text-xs sm:text-sm'>
-				<input type='checkbox' name='delivered' className='mr-2' />
-				Delivered Order
-			</li>
-		</ul>
-	);
-};

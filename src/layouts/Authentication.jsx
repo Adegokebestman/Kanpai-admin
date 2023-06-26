@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Box from '../components/Box';
 
-const Authentication = () => {
+const AuthenticationLayout = () => {
 	return (
 		<main className='container mx-auto max-h-screen h-screen flex items-center justify-evenly'>
 			<main>
@@ -11,4 +11,4 @@ const Authentication = () => {
 		</main>
 	);
 };
-export default Authentication;
+export default AuthenticationLayout;
