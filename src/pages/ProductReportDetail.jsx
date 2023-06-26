@@ -1,18 +1,20 @@
 /* eslint-disable react/prop-types */
+import { useState } from 'react';
 
-import ProductReportComplaintContainer from '../components/ProductReportComplaintContainer';
 import ProductReportDetailHeader from '../components/ProductReportDetailHeader';
 import ProductReportProductContainer from '../components/ProductReportProductContainer';
-import TableComponent from '../components/TableComponent';
+import ReportComplaintContainer from '../components/ReportComplaintContainer';
 import InputFilter from '../components/InputFilter';
 import GeneralModal from '../components/GeneralModal';
-import { useState } from 'react';
-import ModalDeleteProduct from '../components/ModalDeleteProduct';
+import ModalDelete from '../components/ModalDelete';
 import ModalEditProduct from '../components/ModalEditProduct';
+import TableComponent from '../components/TableComponent';
+import { tableData } from '../lib/utils';
 
 const ProductReportDetail = () => {
 	const [openDelete, setOpenDelete] = useState(false);
 	const [isEdit, setIsEdit] = useState(false);
+	const { columns, dataArray } = tableData();
 	return (
 		<section className='space-y-6'>
 			<ProductReportDetailHeader />
@@ -23,11 +25,14 @@ const ProductReportDetail = () => {
 					openEdit={setIsEdit}
 				/>
 
-				<ProductReportComplaintContainer />
-				<InputFilter />
+				<ReportComplaintContainer />
+				<InputFilter action={'Recent Activities'} />
 
 				<GeneralModal isOpen={openDelete} setIsOpen={setOpenDelete}>
-					<ModalDeleteProduct setOpenDelete={setOpenDelete} />
+					<ModalDelete
+						setOpenDelete={setOpenDelete}
+						value={'Product'}
+					/>
 				</GeneralModal>
 
 				<GeneralModal isOpen={isEdit} setIsOpen={setIsEdit}>
@@ -46,59 +51,6 @@ const ProductReportDetail = () => {
 	);
 };
 export default ProductReportDetail;
-
-const columns = [
-	{
-		name: 'Product',
-		selector: (row) => row.productName,
-		// sortable: true,
-	},
-	{
-		name: 'Unit Pirce',
-		selector: (row) => <div>${row.price}</div>,
-		center: true,
-	},
-	{
-		name: 'Quantity',
-		selector: (row) => row.quantity,
-	},
-	{
-		name: 'Date',
-		selector: (row) => row.date,
-	},
-	{
-		name: 'Buyer',
-		selector: (row) => row.buyer,
-	},
-	{
-		name: 'Status',
-		selector: (row) => row.status,
-		sortable: true,
-	},
-];
-
-const dataArray = [];
-
-for (let i = 0; i < 30; i++) {
-	const price = i * 1000;
-	const quantity = (i * 1000) / 3;
-	const productName = `Product ${i + 1}`;
-	const buyer = `Buyer${i + 1}`;
-	const id = i + 1;
-	const date = Date.now() + 1;
-
-	const object = {
-		id: id,
-		price,
-		productName: productName,
-		buyer,
-		date,
-		status: i % 2 == 0 ? 'Pending' : 'Delivered',
-		quantity,
-	};
-
-	dataArray.push(object);
-}
 
 const customStyles = {
 	headRow: {

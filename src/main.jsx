@@ -10,10 +10,12 @@ import {
 import Modal from 'react-modal';
 
 import './index.css';
+import './customStyles.css';
 import ErrorPage from './error-page';
 
-import Root from './layouts/Root.jsx';
-import Authentication from './layouts/Authentication';
+import RootLayout from './layouts/Root.jsx';
+import AuthenticationLayout from './layouts/Authentication';
+import ReportsLayout from './layouts/Reports';
 
 import Login from './pages/Login';
 import Otp_Verification from './pages/Otp_Verification';
@@ -21,7 +23,6 @@ import Dashboard from './pages/Dashboard';
 import Buyers from './pages/Buyers';
 import Sellers from './pages/Sellers';
 import TruckDriver from './pages/TruckDriver';
-import Reports from './layouts/Reports';
 import UsersReports from './pages/UsersReports';
 import ProductReports from './pages/ProductReports';
 import LiveChat from './pages/LiveChat';
@@ -29,17 +30,20 @@ import Payments from './pages/Payments';
 import PaymentDetails from './pages/PaymentDetails';
 import Analytics from './pages/Analytics';
 import ProductReportDetail from './pages/ProductReportDetail';
+import UserReportDetail from './pages/UserReportDetail';
+import UserReportUser from './pages/UserReportUser';
+import UsersReportLayout from './layouts/UsersReportLayout';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route errorElement={<ErrorPage />}>
-			<Route path='/' element={<Root />}>
+			<Route path='/' element={<RootLayout />}>
 				<Route index element={<Dashboard />} />
 				<Route path='users/buyers' element={<Buyers />} />
 				<Route path='users/sellers' element={<Sellers />} />
 				<Route path='users/truck-drivers' element={<TruckDriver />} />
 
-				<Route path='reports' element={<Reports />}>
+				<Route path='reports' element={<ReportsLayout />}>
 					<Route path='products' element={<ProductReports />} />
 					<Route path='users' element={<UsersReports />} />
 				</Route>
@@ -56,13 +60,17 @@ const router = createBrowserRouter(
 					element={<PaymentDetails />}
 				/>
 				<Route path='reports/users/:id' element={<ProductReports />} />
+				<Route path='reports/users/:id' element={<UsersReportLayout />}>
+					<Route index element={<UserReportDetail />} />
+					<Route path={':userId'} element={<UserReportUser />} />
+				</Route>
 				{/* End of Loaders */}
 
 				<Route path='live-chat' element={<LiveChat />} />
 				<Route path='payments' element={<Payments />} />
 				<Route path='analytics' element={<Analytics />} />
 			</Route>
-			<Route path='auth' element={<Authentication />}>
+			<Route path='auth' element={<AuthenticationLayout />}>
 				<Route index element={<Login />} />
 				<Route path='otp_verification' element={<Otp_Verification />} />
 			</Route>

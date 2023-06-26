@@ -35,6 +35,7 @@ export default {
 					200: '#FF0000',
 					300: '#FD88885E',
 					box: '#EF3838',
+					light: '#F9D8D8',
 				},
 			},
 			dropShadow: {

@@ -3,7 +3,7 @@ import SquareBox from '../components/SquareBox';
 import TagHolder from '../components/TagHolder';
 import { useEffect } from 'react';
 
-const Reports = () => {
+const ReportsLayout = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -37,4 +37,4 @@ const Reports = () => {
 		</div>
 	);
 };
-export default Reports;
+export default ReportsLayout;
