@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import ChatIcon from './icons/chaticonColored.svg?component';
+import ChatIcon from './icons/chatIconColored.svg?component';
 
-const ProductReportComplaintContainer = ({
+const ReportComplaintContainer = ({
 	complaint = 'I am writing to express my utmost disappointment and frustration regarding a product I recently purchased from your store. It is with great regret that I inform you of the abysmal delay i have experienced in receiving my product. Please admin treat this as urgent as I need my product',
 	imgSrc = 'https://source.unsplash.com/100x100/?portrait',
 	userName = 'User Name',
@@ -22,7 +22,7 @@ const ProductReportComplaintContainer = ({
 		</article>
 	);
 };
-export default ProductReportComplaintContainer;
+export default ReportComplaintContainer;
 
 const UserBox = ({ imgSrc, userName, role }) => {
 	return (

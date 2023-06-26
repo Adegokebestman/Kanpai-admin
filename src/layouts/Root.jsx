@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { useEffect, useState } from 'react';
 
-export default function Root() {
+export default function RootLayout() {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [screenSize, setScreenSize] = useState();
 	useEffect(() => {
