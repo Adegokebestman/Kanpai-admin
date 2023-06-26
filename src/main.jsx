@@ -26,6 +26,7 @@ import UsersReports from './pages/UsersReports';
 import ProductReports from './pages/ProductReports';
 import LiveChat from './pages/LiveChat';
 import Payments from './pages/Payments';
+import PaymentDetails from './pages/PaymentDetails';
 import Analytics from './pages/Analytics';
 import ProductReportDetail from './pages/ProductReportDetail';
 
@@ -47,6 +48,12 @@ const router = createBrowserRouter(
 				<Route
 					path='reports/products/:id'
 					element={<ProductReportDetail />}
+				/>
+
+				{/* These routes will have loaders i.e a function that runs before the page loads. To load the data using the params and make it available on render instead of useEffect */}
+				<Route
+					path='payments/:id'
+					element={<PaymentDetails />}
 				/>
 				<Route path='reports/users/:id' element={<ProductReports />} />
 				{/* End of Loaders */}

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import InputFilter from '../components/InputFilter';
 import TableComponent from '../components/TableComponent';
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 // import Button from '../components/Button';
 const Payments = () => {
@@ -37,9 +37,11 @@ const Payments = () => {
 		{
 			name: '',
 			selector: (row) => (
+				<NavLink to={`${row.id.toString()}`}>
 				<button className='border-red-text border text-red-200 px-3 py-2 rounded-full'>
 					{row.decline}
 				</button>
+				</NavLink>
 			),
 		},
 	];
