@@ -26,7 +26,7 @@ const ProductReportDetail = () => {
 				/>
 
 				<ReportComplaintContainer />
-				<InputFilter />
+				<InputFilter action={'Recent Activities'} />
 
 				<GeneralModal isOpen={openDelete} setIsOpen={setOpenDelete}>
 					<ModalDelete
