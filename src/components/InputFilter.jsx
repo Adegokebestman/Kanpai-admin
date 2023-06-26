@@ -1,17 +1,18 @@
+/* eslint-disable react/prop-types */
 import SearchIcon from './icons/searchIcon.svg?component';
 import FilterIcon from './icons/filterIcon.svg?component';
 import { useState } from 'react';
 
-const InputFilter = () => {
+const InputFilter = ({action}) => {
 	const [showFilter, setShowFilter] = useState(false);
 	return (
 		<div>
 			<h3 className='sm:hidden font-bold whitespace-nowrap'>
-				Recent Activities
+			{action}
 			</h3>
 			<aside className='flex items-center justify-between sm:justify-center gap-3 sm:gap-5 mx-auto '>
 				<h3 className='hidden sm:block font-bold whitespace-nowrap'>
-					Recent Activities
+			{action}
 				</h3>
 				<form className='border border-primary-700 rounded-lg overflow-hidden p-1 flex items-center gap-1 sm;flex-1'>
 					<input type='text' className='w-full px-2 py-1' />
