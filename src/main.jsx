@@ -55,11 +55,7 @@ const router = createBrowserRouter(
 				/>
 
 				{/* These routes will have loaders i.e a function that runs before the page loads. To load the data using the params and make it available on render instead of useEffect */}
-				<Route
-					path='payments/:id'
-					element={<PaymentDetails />}
-				/>
-				<Route path='reports/users/:id' element={<ProductReports />} />
+
 				<Route path='reports/users/:id' element={<UsersReportLayout />}>
 					<Route index element={<UserReportDetail />} />
 					<Route path={':userId'} element={<UserReportUser />} />
@@ -68,6 +64,7 @@ const router = createBrowserRouter(
 
 				<Route path='live-chat' element={<LiveChat />} />
 				<Route path='payments' element={<Payments />} />
+				<Route path='payments/:id' element={<PaymentDetails />} />
 				<Route path='analytics' element={<Analytics />} />
 			</Route>
 			<Route path='auth' element={<AuthenticationLayout />}>

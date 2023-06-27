@@ -38,8 +38,14 @@ const ProductReportProductContainer = ({
 			</div>
 
 			<aside className='flex items-center gap-10 self-center'>
-				<EditIcon onClick={() => openEdit(true)} />
-				<DeleteIcon onClick={() => openDelete(true)} />
+				<EditIcon
+					onClick={() => openEdit(true)}
+					className='cursor-pointer'
+				/>
+				<DeleteIcon
+					onClick={() => openDelete(true)}
+					className='cursor-pointer'
+				/>
 			</aside>
 		</article>
 	);
