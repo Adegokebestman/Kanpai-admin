@@ -13,7 +13,7 @@ const Dashboard = () => {
       {/* Chartjs */}
       <LineChart />
       {/* Recent activities */}
-      <div className="border-2 py-4 lg:py-6 px-3 rounded-xl border-gray-400 w-[95%] mx-auto">
+      <div className="border-2 py-4 lg:py-6 px-3 rounded-xl border-gray-900 w-[95%] mx-auto">
         <InputFilter action={'Recent Activities'}/>
 
         {/* customer table */}

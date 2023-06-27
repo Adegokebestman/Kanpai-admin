@@ -2,7 +2,7 @@
 import InputFilter from '../components/InputFilter';
 import PaymentProfile from '../components/PaymentProfile';
 // import GeneralModal from '../components/GeneralModal';
-import BackArrow from '../components/icons/backArrow.svg?component';
+import BackButtonNavigation from '../components/BackButtonNavigation';
 import PaymentActivity from '../components/PaymentActivity';
 
 const PaymentDetails = () => {
@@ -13,7 +13,7 @@ const PaymentDetails = () => {
         </div>
         <div className='flex md:justify-between items-center'>
         <span className='md:flex items-center hidden'>
-        <BackArrow /> Back
+        <BackButtonNavigation />
         </span>
     <div className='hidden md:flex' >
         <InputFilter />

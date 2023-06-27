@@ -16,7 +16,6 @@ const PaymentProfile = () => {
 								imgTitle={'userName'}
 							/>
        </div>
-        {/* <ImageElement src="https://source.unsplash.com/75x75/?portrait" alt="" /> */}
         <div>
           <h1 className="font-medium text-2xl">Loyd Francis</h1>
           <span className='flex items-center  gap-4 leading-8'>

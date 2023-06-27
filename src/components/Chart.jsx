@@ -67,7 +67,7 @@ const LineChart = () => {
         {/* Buttons for selecting data */}
       </div>
 
-      <div className='border-2 rounded-xl border-gray-400 mx-auto w-[95%]'>
+      <div className='border-2 rounded-xl border-gray-900 mx-auto w-[95%]'>
 				<div className='flex justify-between items-center p-4 sm:p-10'>
 					<p className='text-xl font-medium'>Analytics</p>
 
