@@ -27,6 +27,8 @@ export default {
 					fade: '#C3F8C5',
 					bg: '#0EBC93',
 					text: '#105723',
+					200: '#079775',
+					300: '#04624C',
 				},
 				red: {
 					fade: '#f9d7bf45',
