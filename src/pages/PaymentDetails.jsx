@@ -3,7 +3,7 @@ import InputFilter from '../components/InputFilter';
 import PaymentProfile from '../components/PaymentProfile';
 // import GeneralModal from '../components/GeneralModal';
 import BackArrow from '../components/icons/backArrow.svg?component';
-
+import PaymentActivity from '../components/PaymentActivity';
 
 const PaymentDetails = () => {
   return (
@@ -30,6 +30,8 @@ const PaymentDetails = () => {
     {/* Main content */}
     <div className='border-[1px] rounded-xl my-4 border-gray-900 mx-auto md:w-[95%] py-10'>
     <PaymentProfile />
+    <PaymentActivity />
+
     </div>
     </div>
   )
