@@ -5,16 +5,14 @@ import { useState } from 'react';
 import FilterComponent from './FilterComponent';
 import { filterProducts } from '../lib/utils';
 
-const InputFilter = ({action}) => {
+const InputFilter = ({ action }) => {
 	const [showFilter, setShowFilter] = useState(false);
 	return (
 		<div>
-			<h3 className='sm:hidden font-bold whitespace-nowrap'>
-			{action}
-			</h3>
+			<h3 className='sm:hidden font-bold whitespace-nowrap'>{action}</h3>
 			<aside className='flex items-center justify-between sm:justify-center gap-3 sm:gap-5 mx-auto '>
 				<h3 className='hidden sm:block font-bold whitespace-nowrap'>
-			{action}
+					{action}
 				</h3>
 				<form className='border border-primary-700 rounded-lg overflow-hidden p-1 flex items-center gap-1 sm;flex-1'>
 					<input type='text' className='w-full px-2 py-1' />

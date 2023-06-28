@@ -22,19 +22,19 @@ const Otp_Verification = () => {
 		// navigate('/auth/otp_verification', { replace: true });
 	}
 	return (
-		<section>
+		<section className='px-6'>
 			<h1 className='font-bold text-2xl font-poppins mb-2'>
 				Email Verification
 			</h1>
 			<p className='font-poppins text-sm leading-relaxed'>
 				Type in the sent to your mail
 			</p>
-			<div className='mt-12'>
-				<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className='mt-12 '>
+				<div className='flex items-center justify-center gap-3 sm:gap-5'>
 					{otp.map((data, index) => {
 						return (
 							<input
-								className='w-10 h-10 border-b border-b-black mx-5 outline-none text-center font-bold font-rubik'
+								className='w-9 h-9 border-b border-b-black outline-none text-center font-bold font-rubik'
 								type='text'
 								name='otp'
 								maxLength='1'
@@ -45,14 +45,14 @@ const Otp_Verification = () => {
 							/>
 						);
 					})}
-					<button
-						type='submit'
-						className='text-white bg-primary-700 rounded-lg w-full py-2 mt-12'
-					>
-						Submit
-					</button>
-				</form>
-			</div>
+				</div>
+				<button
+					type='submit'
+					className='text-white bg-primary-700 rounded-lg w-full py-2 mt-12'
+				>
+					Submit
+				</button>
+			</form>
 
 			<p className='font-semibold mt-5'>
 				Didn&apos;t get the code?{' '}

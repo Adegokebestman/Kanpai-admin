@@ -23,10 +23,12 @@ export const filterProducts = [
 	{
 		tag: 'pending order',
 		url: '?order=pendingOrder',
+		name: 'pending',
 	},
 	{
 		tag: 'delivered order',
 		url: '?order=pendingOrder',
+		name: 'delivered',
 	},
 ];
 

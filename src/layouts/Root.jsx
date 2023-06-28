@@ -24,29 +24,27 @@ export default function RootLayout() {
 		}
 	}, [screenSize]);
 
-	// const handleActiveMenu = () => setActiveMenu(!activeMenu);
-
 	return (
 		<>
 			<div className='relative grid grid-cols-12 min-h-screen'>
 				<div
 					className={`${
 						showSidebar
-							? 'absolute top-0 left-0 bg-white z-10 bottom-0'
-							: 'hidden col-span-2 '
-					} lg:block`}
+							? 'fixed top-0 left-0 bg-white z-10 bottom-0'
+							: 'hidden'
+					} lg:block col-span-3`}
 				>
 					<Sidebar />
 				</div>
 
 				<main
 					id='content'
-					className={`col-span-12 lg:col-span-10 flex flex-col md:gap-5 justify-normal ${
+					className={`col-span-12 lg:col-span-9 flex flex-col md:gap-5 justify-normal w-full overflow-auto h-screen ${
 						showSidebar ? 'z-0' : ''
 					}`}
 				>
 					<Header setShowSidebar={setShowSidebar} />
-					<section className='p-3 md:py-4 md:px-5'>
+					<section className='p-3 md:py-4 md:pr-4 md:pl-0'>
 						<Outlet />
 					</section>
 				</main>

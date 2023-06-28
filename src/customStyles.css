@@ -36,3 +36,7 @@
 		opacity: 0;
 	}
 }
+
+#sortbox:checked ~ #sortboxmenu {
+	opacity: 1;
+}

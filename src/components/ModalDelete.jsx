@@ -4,7 +4,7 @@ import { useState } from 'react';
 import CancelIcon from './icons/cancelIcon.svg?component';
 import ModalSuccess from './ModalSuccess';
 
-const ModalDelete = ({ setOpenDelete, value }) => {
+const ModalDelete = ({ setOpenDelete, value, recycle }) => {
 	// click delete sends a request to delete the data
 	const [deleted, setDeleted] = useState(false);
 
@@ -16,12 +16,24 @@ const ModalDelete = ({ setOpenDelete, value }) => {
 			{!deleted ? (
 				<>
 					<div className='flex items-center justify-between'>
-						<h4 className='capitalize'>Delete {value}</h4>
+						{recycle ? (
+							<h4 className='capitalize'>Unsubscribe {value}</h4>
+						) : (
+							<h4 className='capitalize'>Delete {value}</h4>
+						)}
 						<CancelIcon onClick={() => setOpenDelete(false)} />
 					</div>
-					<h4 className='text-lg sm:text-xl font-bold text-center w-[90%]'>
-						Are you sure you want to delete this {value}
-					</h4>
+
+					{recycle ? (
+						<h4 className='text-lg sm:text-xl font-bold text-center w-[90%]'>
+							Are you sure you unsubscribe this {value}
+						</h4>
+					) : (
+						<h4 className='text-lg sm:text-xl font-bold text-center w-[90%]'>
+							Are you sure you want to delete this {value}
+						</h4>
+					)}
+
 					<div className='flex items-center justify-around gap-10'>
 						<button
 							onClick={() => setOpenDelete(false)}
@@ -40,7 +52,9 @@ const ModalDelete = ({ setOpenDelete, value }) => {
 			) : (
 				<ModalSuccess
 					action={setOpenDelete}
-					label={value + ' Deleted'}
+					label={
+						recycle ? value + ' Unsuspended' : value + ' Deleted'
+					}
 				/>
 			)}
 		</article>

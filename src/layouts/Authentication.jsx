@@ -4,7 +4,7 @@ import Box from '../components/Box';
 const AuthenticationLayout = () => {
 	return (
 		<main className='container mx-auto max-h-screen h-screen flex items-center justify-evenly'>
-			<main>
+			<main className='px-4'>
 				<Outlet />
 			</main>
 			<Box />

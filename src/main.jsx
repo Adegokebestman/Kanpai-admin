@@ -15,7 +15,9 @@ import ErrorPage from './error-page';
 
 import RootLayout from './layouts/Root.jsx';
 import AuthenticationLayout from './layouts/Authentication';
+import UsersReportLayout from './layouts/UsersReportLayout';
 import ReportsLayout from './layouts/Reports';
+import RecycleProducts from './pages/RecycleProducts';
 
 import Login from './pages/Login';
 import Otp_Verification from './pages/Otp_Verification';
@@ -32,7 +34,8 @@ import Analytics from './pages/Analytics';
 import ProductReportDetail from './pages/ProductReportDetail';
 import UserReportDetail from './pages/UserReportDetail';
 import UserReportUser from './pages/UserReportUser';
-import UsersReportLayout from './layouts/UsersReportLayout';
+import RecycleLayout from './layouts/RecycleLayout';
+import RecycleUsers from './pages/RecycleUsers';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -48,24 +51,24 @@ const router = createBrowserRouter(
 					<Route path='users' element={<UsersReports />} />
 				</Route>
 
-				{/* These routes will have loaders i.e a function that runs before the page loads. To load the data using the params and make it available on render instead of useEffect */}
 				<Route
 					path='reports/products/:id'
 					element={<ProductReportDetail />}
 				/>
-
-				{/* These routes will have loaders i.e a function that runs before the page loads. To load the data using the params and make it available on render instead of useEffect */}
-
 				<Route path='reports/users/:id' element={<UsersReportLayout />}>
 					<Route index element={<UserReportDetail />} />
 					<Route path={':userId'} element={<UserReportUser />} />
 				</Route>
-				{/* End of Loaders */}
 
 				<Route path='live-chat' element={<LiveChat />} />
 				<Route path='payments' element={<Payments />} />
 				<Route path='payments/:id' element={<PaymentDetails />} />
 				<Route path='analytics' element={<Analytics />} />
+
+				<Route path='recycle' element={<RecycleLayout />}>
+					<Route path='users' element={<RecycleUsers />} />
+					<Route path='products' element={<RecycleProducts />} />
+				</Route>
 			</Route>
 			<Route path='auth' element={<AuthenticationLayout />}>
 				<Route index element={<Login />} />

@@ -1,12 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { usersLinks } from '../lib/sidebarContents';
-
-import Users from './icons/usersIcon.svg?component';
 import ArrowDown from './icons/arrowDropDown.svg?component';
 
-const UserSideBar = () => {
+const UserSideBar = ({ title, data, icon }) => {
 	const [open, setOpen] = useState(false);
 	return (
 		<>
@@ -16,28 +14,28 @@ const UserSideBar = () => {
 				}`}
 				onClick={() => setOpen(!open)}
 			>
-				<Users stroke='black' strokeWidth={'1.5'} />
-				Users
+				<span className=''>{icon}</span>
+				{title}
 				<ArrowDown />
 			</li>
 
 			<ul
 				className={`${
 					open
-						? 'flex flex-col transition-[display] ease-linear bg-gray-100 -mt-4 rounded-xl overflow-hidden'
+						? 'flex flex-col transition-[display] ease-linear bg-gray-100 sm:-mt-4 rounded-xl overflow-hidden'
 						: 'hidden'
 				}`}
 			>
-				{usersLinks.map((user) => (
+				{data.map((content) => (
 					<NavLink
-						key={user.link}
-						to={user.link}
+						key={content.link}
+						to={content.link}
 						className={({ isActive }) =>
 							isActive ? 'bg-gray-300' : ''
 						}
 					>
 						<li className='hover:bg-gray-300 p-2 w-full hover:pl-3 transition-all ease-linear'>
-							{user.title}
+							{content.title}
 						</li>
 					</NavLink>
 				))}
