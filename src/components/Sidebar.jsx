@@ -20,10 +20,10 @@ const Sidebar = () => {
 	// }
 
 	return (
-		<section className='shadow-lg min-h-screen fixed bg-white space-y-16 py-8'>
+		<section className='shadow-lg h-screen min-h-screen bg-white space-y-16 py-5 sm:py-8 overflow-y-auto lg:w-[90%]'>
 			<KanpaiLogo className='mx-auto' />
 
-			<ul className='flex flex-col justify-start gap-6 px-4'>
+			<ul className='flex flex-col justify-start gap-3 px-3 sm:gap-6 sm:px-4'>
 				<NavLink
 					to={dashboard.link}
 					className={({ isActive }) =>
@@ -32,7 +32,7 @@ const Sidebar = () => {
 							: ''
 					}
 				>
-					<li className='flex items-center gap-3 text-sm sm:text-base py-2 px-6'>
+					<li className='flex items-center gap-3 text-sm sm:text-base py-2 px-3 sm:px-6'>
 						<span className='text-lg sm:text-2xl text-inherit font-extrabold'>
 							{dashboard.icon}
 						</span>
@@ -56,7 +56,7 @@ const Sidebar = () => {
 								: ''
 						}
 					>
-						<li className='flex items-center gap-3 text-sm sm:text-base py-2 px-6'>
+						<li className='flex items-center gap-3 text-sm sm:text-base py-2 px-3 sm:px-6'>
 							<span className='text-lg sm:text-2xl text-inherit font-extrabold'>
 								{content.icon}
 							</span>
@@ -70,16 +70,15 @@ const Sidebar = () => {
 					icon={<BsRecycle />}
 					title={'Recycle Bin'}
 				/>
+				<NavLink to={logout.link}>
+					<li className='flex items-center gap-3 text-sm sm:text-base py-2 px-3 sm:px-6 text-[#A65959] font-bold mt-5 sm:mt-10'>
+						<span className='text-lg sm:text-2xl text-inherit font-extrabold'>
+							{logout.icon}
+						</span>
+						{logout.title}
+					</li>
+				</NavLink>
 			</ul>
-
-			<NavLink to={logout.link}>
-				<p className='flex items-center gap-3 text-sm sm:text-base py-2 px-6 mt-16 text-[#A65959] font-bold'>
-					<span className='text-lg sm:text-2xl text-inherit font-extrabold'>
-						{logout.icon}
-					</span>
-					<span>{logout.title}</span>
-				</p>
-			</NavLink>
 		</section>
 	);
 };

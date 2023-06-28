@@ -22,7 +22,7 @@ const UserSideBar = ({ title, data, icon }) => {
 			<ul
 				className={`${
 					open
-						? 'flex flex-col transition-[display] ease-linear bg-gray-100 -mt-4 rounded-xl overflow-hidden'
+						? 'flex flex-col transition-[display] ease-linear bg-gray-100 sm:-mt-4 rounded-xl overflow-hidden'
 						: 'hidden'
 				}`}
 			>
