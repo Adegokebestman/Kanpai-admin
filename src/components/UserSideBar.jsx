@@ -10,11 +10,13 @@ const UserSideBar = ({ title, data, icon }) => {
 		<>
 			<li
 				className={`flex items-center gap-3 text-sm sm:text-base py-2 px-6 rounded-xl cursor-pointer ${
-					open ? 'bg-primary-700' : ''
+					open ? 'bg-primary-700 text-white' : ''
 				}`}
 				onClick={() => setOpen(!open)}
 			>
-				<span className=''>{icon}</span>
+				<span className='text-lg sm:text-2xl text-inherit font-extrabold'>
+					{icon}
+				</span>
 				{title}
 				<ArrowDown />
 			</li>

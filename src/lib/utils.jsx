@@ -32,6 +32,52 @@ export const filterProducts = [
 	},
 ];
 
+export const reportTags = [
+	{
+		title: 'Products Flagged',
+		url: 'products',
+	},
+	{
+		title: 'Users Flagged',
+		url: 'users',
+	},
+];
+
+export const buyersTags = [
+	{
+		title: 'Buyers Details',
+		url: '.',
+	},
+	{
+		title: 'Buyers Activity',
+		url: 'activities',
+	},
+];
+export const driversTags = [
+	{
+		title: 'Drivers Details',
+		url: '.',
+	},
+	{
+		title: 'Drivers Activity',
+		url: 'activities',
+	},
+];
+export const sellersTags = [
+	{
+		title: 'Seller Details',
+		url: '.',
+	},
+	{
+		title: 'Seller Activity',
+		url: 'activities',
+	},
+	{
+		title: 'Seller Inventory',
+		url: 'inventory',
+	},
+];
+
 export function tableData(user) {
 	const columns = [
 		{

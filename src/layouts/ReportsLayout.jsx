@@ -27,7 +27,7 @@ const ReportsLayout = () => {
 	return (
 		<div>
 			<header className='flex justify-start items-center gap-5'>
-				<SquareBox />
+				<SquareBox classnames='border-red-text text-red-text' />
 				<TagHolder />
 			</header>
 
