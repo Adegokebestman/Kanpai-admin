@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import NotificationIcon from './icons/notificationIcon.svg?component';
-
+import {AiOutlineMenu} from 'react-icons/ai'
 const Header = ({ setShowSidebar }) => {
 	return (
 		<header className='h-[100px] py-6'>
@@ -38,7 +38,7 @@ const Header = ({ setShowSidebar }) => {
 						className='lg:hidden rounded-full bg-gray-100 p-2 flex items-center justify-center cursor-pointer'
 						onClick={() => setShowSidebar((prev) => !prev)}
 					>
-						B
+						<AiOutlineMenu />
 					</span>
 				</div>
 			</div>

@@ -1,11 +1,18 @@
+import { useState } from "react";
 // import TableComponent from '../components/TableComponent';
 import InputFilter from "../components/InputFilter";
 import PaymentProfile from "../components/PaymentProfile";
-// import GeneralModal from '../components/GeneralModal';
+import GeneralModal from '../components/GeneralModal';
+import ModalDelete from '../components/ModalDelete';
+import ModalSuspendUser from "../components/ModalSuspendUser";
 import BackButtonNavigation from "../components/BackButtonNavigation";
 import PaymentActivity from "../components/PaymentActivity";
+import PaymentApproval from "../components/PaymentApproval";
 
 const PaymentDetails = () => {
+  const [isOpenSuspension, setIsOpenSuspension] = useState(false);
+	const [isOpenDelete, setIsOpenDelete] = useState(false);
+
   return (
     <div>
       <div className="flex justify-center md:hidden mb-4">
@@ -19,10 +26,10 @@ const PaymentDetails = () => {
           <InputFilter />
         </div>
         <span className="flex  md:justify-end gap-4">
-          <button className="bg-red-text px-4 py-2  text-white inline-flex items-center space-x-2 rounded-full">
+          <button onClick={() => setIsOpenSuspension(true)} className="bg-red-text px-4 py-2  text-white inline-flex items-center space-x-2 rounded-full">
             Suspend user
           </button>
-          <button className="border-red-text border px-4 py-2  text-red-text inline-flex items-center space-x-2 rounded-full">
+          <button onClick={() => setIsOpenDelete(true)} className="border-red-text border px-4 py-2  text-red-text inline-flex items-center space-x-2 rounded-full">
             Block user
           </button>
         </span>
@@ -30,7 +37,17 @@ const PaymentDetails = () => {
       {/* Main content */}
       <div className="border-[1px] rounded-xl my-4 border-gray-900 mx-auto md:w-[95%] py-10">
         <PaymentProfile />
+        <PaymentApproval />
         <PaymentActivity />
+        <GeneralModal
+				isOpen={isOpenSuspension}
+				setIsOpen={setIsOpenSuspension}
+			>
+				<ModalSuspendUser setIsOpenSuspension={setIsOpenSuspension} />
+			</GeneralModal>
+			<GeneralModal isOpen={isOpenDelete} setIsOpen={setIsOpenDelete}>
+				<ModalDelete setOpenDelete={setIsOpenDelete} value={'User'} />
+			</GeneralModal>
       </div>
     </div>
   );

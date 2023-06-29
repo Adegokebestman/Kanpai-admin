@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
-
+import { Link } from 'react-router-dom';
 ChartJS.register(
   ArcElement,
   CategoryScale,
@@ -99,30 +99,30 @@ const LineChart = () => {
 							id='sortboxmenu'
 							className='absolute right-1 top-full min-w-max shadow rounded opacity-0 bg-gray-600 border border-gray-400 transition delay-75 ease-in-out z-10'
 						>
-							<ul className='block text-right text-gray-900'>
+							<ul className='block text-right text-gray-400'>
 								<li>
-									<a
+									<Link to=''
 										href='#'
 										className='block px-3 py-2 hover:bg-gray-200'
 									>
 										Month
-									</a>
+									</Link>
 								</li>
 								<li>
-									<a
+									<Link to=''
 										href='#'
 										className='block px-3 py-2 hover:bg-gray-200'
 									>
 										Day
-									</a>
+									</Link>
 								</li>
 								<li>
-									<a
+									<Link to=''
 										href='#'
 										className='block px-3 py-2 hover:bg-gray-200'
 									>
 										Week
-									</a>
+									</Link>
 								</li>
 							</ul>
 						</div>
