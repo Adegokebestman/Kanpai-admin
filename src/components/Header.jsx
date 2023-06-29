@@ -3,7 +3,7 @@ import NotificationIcon from './icons/notificationIcon.svg?component';
 
 const Header = ({ setShowSidebar }) => {
 	return (
-		<header className='min-h-[80px] max-h[120px] py-6'>
+		<header className='h-[100px] py-6'>
 			<div className='flex items-center justify-between px-5 sm:px-10 lg:px-14'>
 				<div>
 					<h2 className='font-[500] text-lg sm:text-2xl capitalize'>
@@ -41,10 +41,8 @@ const Header = ({ setShowSidebar }) => {
 						B
 					</span>
 				</div>
-
 			</div>
 			<hr className='h-px my-3 bg-gray-200 border-1 dark:bg-gray-700'></hr>
-
 		</header>
 	);
 };

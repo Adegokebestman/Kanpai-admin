@@ -7,7 +7,7 @@ const SquareBox = ({
 }) => {
 	return (
 		<div
-			className={`p-2 space-y-1 lg:p-3 lg:space-y-2 border rounded border-red-text max-w-max ${classnames}`}
+			className={`flex flex-col p-2 gap-1 lg:p-3 lg:gap2 border rounded max-w-max ${classnames}`}
 		>
 			<p className='font-semibold text-xl lg:text-4xl'>{number}</p>
 			<h3 className='capitalize text-base lg:text-lg'>{tag}</h3>
