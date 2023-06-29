@@ -7,7 +7,6 @@ import ModalDelete from '../components/ModalDelete';
 import ModalSuspendUser from "../components/ModalSuspendUser";
 import BackButtonNavigation from "../components/BackButtonNavigation";
 import PaymentActivity from "../components/PaymentActivity";
-import PaymentApproval from "../components/PaymentApproval";
 
 const PaymentDetails = () => {
   const [isOpenSuspension, setIsOpenSuspension] = useState(false);
@@ -37,7 +36,6 @@ const PaymentDetails = () => {
       {/* Main content */}
       <div className="border-[1px] rounded-xl my-4 border-gray-900 mx-auto md:w-[95%] py-10">
         <PaymentProfile />
-        <PaymentApproval />
         <PaymentActivity />
         <GeneralModal
 				isOpen={isOpenSuspension}

@@ -15,7 +15,7 @@ const PaymentApproval = () => {
 
 	let srcImg = 'https://source.unsplash.com/400x400/?portrait';
 	return (
-		<section className='mt-4'>
+		<section className='px-2 sm:px-3 py-4 pb-2 border-l border-l-gray-200 w-[95%] mx-auto flex flex-col gap-3'>
 			<div
 				className={`flex p-2 sm:px-8 items-center justify-between  sm:gap-4 hover:shadow text-black ${
 					openOptions && 'bg-gray-200'

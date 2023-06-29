@@ -3,6 +3,7 @@ import { BiMenuAltRight } from 'react-icons/bi';
 import { filterActivities } from '../lib/utils';
 import FilterComponent from '../components/FilterComponent';
 import UserPaymentActivity from './UserPaymentActivity';
+import PaymentApproval from './PaymentApproval';
 // Dummy data
 
 const PaymentActivity = () => {
@@ -23,6 +24,7 @@ const PaymentActivity = () => {
 					<FilterComponent data={filterActivities} left={true} />
 				)}
 			</div>
+			<PaymentApproval />
 			<UserRecentRecord />
 		</div>
 	);
