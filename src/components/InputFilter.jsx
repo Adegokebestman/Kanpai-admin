@@ -40,7 +40,7 @@ const InputFilter = ({ action }) => {
 				</form>
 				<div className='relative'>
 					<div
-						className='p-3 rounded-lg bg-primary-700'
+						className='p-2 sm:p-3 rounded-lg bg-primary-700'
 						onClick={() => setShowFilter(!showFilter)}
 					>
 						<FilterIcon />
