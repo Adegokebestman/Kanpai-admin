@@ -17,6 +17,7 @@
 		scrollbar-width: thin;
 		scrollbar-color: #ff7e20 #f1f1f1;
 		color: #19191a;
+		scroll-behavior: smooth;
 	}
 	::-webkit-scrollbar {
 		width: 3px;

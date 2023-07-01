@@ -5,7 +5,7 @@ import { useState } from 'react';
 import FilterComponent from './FilterComponent';
 import { filterProducts } from '../lib/utils';
 
-const InputFilter = ({ action }) => {
+const InputFilter = ({ action, filter = true, label = true }) => {
 	const [showFilter, setShowFilter] = useState(false);
 	const [searchText, setSearchText] = useState('');
 	function handleSubmit(e) {
@@ -35,25 +35,29 @@ const InputFilter = ({ action }) => {
 						className='bg-primary-700 inline-flex items-center gap-2 rounded-lg px-4 py-2 text-white text-sm lg:text-base'
 					>
 						<SearchIcon />
-						<span className='hidden sm:inline'>Search</span>
+						{label && (
+							<span className='hidden sm:inline'>Search</span>
+						)}
 					</button>
 				</form>
-				<div className='relative'>
-					<div
-						className='p-2 sm:p-3 rounded-lg bg-primary-700'
-						onClick={() => setShowFilter(!showFilter)}
-					>
-						<FilterIcon />
+				{filter && (
+					<div className='relative'>
+						<div
+							className='p-2 sm:p-3 rounded-lg bg-primary-700'
+							onClick={() => setShowFilter(!showFilter)}
+						>
+							<FilterIcon />
+						</div>
+						{showFilter && (
+							<FilterComponent
+								data={filterProducts}
+								title={'sort by'}
+								toggle={true}
+								left={false}
+							/>
+						)}
 					</div>
-					{showFilter && (
-						<FilterComponent
-							data={filterProducts}
-							title={'sort by'}
-							toggle={true}
-							left={false}
-						/>
-					)}
-				</div>
+				)}
 			</aside>
 		</div>
 	);
