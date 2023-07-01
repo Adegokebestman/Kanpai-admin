@@ -46,6 +46,7 @@ import SellerActivities from './pages/SellerActivities';
 import SellerInventory from './pages/SellerInventory';
 import DriverDetails from './pages/DriverDetails';
 import DriverActivities from './pages/DriverActivities';
+import { ChatProvider } from './context/ChatContext';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -120,6 +121,8 @@ Modal.setAppElement('#root');
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<ChatProvider>
+			<RouterProvider router={router} />
+		</ChatProvider>
 	</React.StrictMode>
 );
