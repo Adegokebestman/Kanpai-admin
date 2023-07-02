@@ -1,9 +1,12 @@
+import BuyerList from '../components/BuyerList';
+
 const Buyers = () => {
+	const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 	return (
-		<div>
-			<div className='flex justify-between'>
-				<h1 className='font-semibold text-xl'>All Buyers</h1>
-			</div>
+		<div className='flex flex-col gap-3'>
+			{arr.map((ar) => (
+				<BuyerList key={ar} value={'user'} id={ar}/>
+			))}
 		</div>
 	);
 };

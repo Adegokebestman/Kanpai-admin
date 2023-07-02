@@ -43,3 +43,16 @@
 	src: url('/Rubik.ttf');
 	font-weight: 300;
 }
+
+
+.msg{
+	height: 250px;
+ }
+
+ .camera{
+ margin-top: -40px;
+ margin-left: 150px;
+ z-index: 99;
+ position: relative;
+
+ }

@@ -1,4 +1,7 @@
+import SupplierProductsView from "../components/SupplierProductsView";
 const SellerDetails = () => {
-	return <div>SellerDetails</div>;
+	return <div>
+		<SupplierProductsView />
+	</div>;
 };
 export default SellerDetails;
