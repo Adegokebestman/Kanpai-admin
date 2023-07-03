@@ -1,7 +1,9 @@
-import SupplierInventory from "../components/SupplierInventory";
+import SupplierInventory from '../components/SupplierInventory';
 const SellerInventory = () => {
-	return <div>
-		<SupplierInventory />
-	</div>;
+	return (
+		<>
+			<SupplierInventory />
+		</>
+	);
 };
 export default SellerInventory;

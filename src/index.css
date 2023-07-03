@@ -36,6 +36,23 @@
 	::-webkit-scrollbar-thumb:hover {
 		background: #ff7e20;
 	}
+	.scrollBarContainer::-webkit-scrollbar {
+		width: 3px;
+		height: 2px;
+	}
+
+	.scrollBarContainer::-webkit-scrollbar-track {
+		background: #f1f1f1;
+	}
+
+	.scrollBarContainer::-webkit-scrollbar-thumb {
+		background: #ff7e20;
+		border-radius: 4px;
+	}
+
+	.scrollBarContainer::-webkit-scrollbar-thumb:hover {
+		background: #ff7e20;
+	}
 }
 
 @font-face {
@@ -44,15 +61,13 @@
 	font-weight: 300;
 }
 
-
-.msg{
+.msg {
 	height: 250px;
- }
+}
 
- .camera{
- margin-top: -40px;
- margin-left: 150px;
- z-index: 99;
- position: relative;
-
- }
+.camera {
+	margin-top: -40px;
+	margin-left: 150px;
+	z-index: 99;
+	position: relative;
+}

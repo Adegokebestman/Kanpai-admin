@@ -24,15 +24,15 @@ const UserActivity = () => {
 					</h2>
 					<p className='text-xs lg:text-sm'>EmailOfUserHere</p>
 				</div>
-				<div className='flex items-center justify-between overflow-scroll md:overflow-hidden flex-1 md:w-full w-11/12'>
+				<div className='flex items-center justify-between overflow-auto md:overflow-hidden flex-1 md:w-full w-11/12'>
 					<p className='text-left px-4 text-xs sm:text-sm'>
-                    Updated a product on his inventory
+						Updated a product on his inventory
 					</p>
 
 					<div className='flex items-center text-xs sm:text-sm'>
-                    <p className='text-left px-4 text-xs sm:text-sm'>
-                    12/03/2022
-					</p>
+						<p className='text-left px-4 text-xs sm:text-sm'>
+							12/03/2022
+						</p>
 						<span
 							className='p-2 rounded-full bg-gray-50 ml-2 sm:ml-4 cursor-pointer'
 							onClick={() => setOpenOptions(!openOptions)}
