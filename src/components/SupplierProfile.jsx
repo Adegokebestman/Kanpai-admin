@@ -7,8 +7,8 @@ const SupplierProfile = () => {
 
 	return (
 		<div>
-			<div className='md:flex md:flex-col-3  justify-between items-center mx-4'>
-				<span className='flex items-center gap-4'>
+			<div className='flex flex-col-reverse md:flex-row justify-between items-center mx-4'>
+				<div className='flex items-center gap-4'>
 					<span className='hidden sm:block top-1/2 -right-[5%] translate-x-[20%] -translate-y-1/2 rounded-full bg-[#F0CFB6] text-[#A8591F] text-xs sm:text-sm relative py-1 px-2'>
 						seller
 					</span>
@@ -25,12 +25,12 @@ const SupplierProfile = () => {
 						</span>
 						<p>Joined 6th March, 2022</p>
 					</div>
-				</span>
+				</div>
 
 				<SquareBox
 					tag='WALLET BALANCE'
 					number={'$ 10,230.00'}
-					classnames='border-2 border-green-bg rounded-lg text-green-200 flex-col-reverse'
+					classnames='border-2 border-green-bg rounded-lg text-green-200 flex-col-reverse w-full px-4 mb-2 md:mb-0'
 				/>
 			</div>
 		</div>
