@@ -22,7 +22,7 @@ const EditUserForm = ({ formValues, setFormValues, handleSubmit }) => {
 			{/* form */}
 			<div className='flex flex-col gap-3'>
 				<Input
-					label={'Product Name'}
+					label={' Name'}
 					name={'name'}
 					type={'text'}
 					value={formValues.name}

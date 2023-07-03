@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
+import { useState } from 'react';
 import TableComponent from '../components/TableComponent';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { LuEdit3 } from 'react-icons/lu';
-import { NavLink } from 'react-router-dom';
-import ModalEditUser from './ModalEditUser';
+import ModalEditProduct from './ModalEditProduct';
 import GeneralModal from './GeneralModal';
 import ModalDelete from './ModalDelete';
 
 const SupplierInventory = () => {
+  const [openDelete, setOpenDelete] = useState(false);
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 	const columns = [
 		{
 			name: '',
@@ -61,8 +63,8 @@ const SupplierInventory = () => {
 			name: '',
 			selector: () => (
 				<div className='text-sm md:text-2xl text-primary-700 flex items-center gap-3'>
-					<LuEdit3 className='cursor-pointer hover:text-gray-300' />
-					<RiDeleteBinLine className='cursor-pointer hover:text-gray-300' />
+					<LuEdit3 className='cursor-pointer hover:text-gray-300' onClick={() => setIsEditModalOpen(true)} />
+					<RiDeleteBinLine className='cursor-pointer hover:text-gray-300' onClick={() => setOpenDelete(true)} />
 				</div>
 			),
 		},
@@ -104,6 +106,16 @@ const SupplierInventory = () => {
 				selectableRows={false}
 				customStyles={customStyles}
 			/>
+       <GeneralModal isOpen={isEditModalOpen} setIsOpen={setIsEditModalOpen}>
+        <ModalEditProduct setOpenDelete={setIsEditModalOpen} />
+      </GeneralModal>
+
+ <GeneralModal isOpen={openDelete} setIsOpen={setOpenDelete}>
+					<ModalDelete
+						setOpenDelete={setOpenDelete}
+						value={'Product'}
+					/>
+				</GeneralModal>
 		</div>
 	);
 };
