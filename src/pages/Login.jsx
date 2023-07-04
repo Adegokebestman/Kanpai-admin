@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Oval } from 'react-loader-spinner';
+
+import AuthContext from '../context/AuthContext';
+import { loginUser } from '../lib/apiEndPoints';
+
 import LabelInput from '../components/LabelInput';
 import WavingHand from '../components/icons/WavingHandIcon';
-import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 	const [formData, updateFormData] = useState();
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState('');
 	const navigate = useNavigate();
+
+	const { setUserData } = useContext(AuthContext);
 
 	const handleChange = (e) => {
 		updateFormData({
@@ -14,10 +23,27 @@ const Login = () => {
 			[e.target.name]: e.target.value.trim(),
 		});
 	};
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
+		setLoading(true);
+		const email = formData.email.toLowerCase();
+		const password = formData.password;
 		//submit the data
-		navigate('/auth/otp_verification', { replace: true });
+		const res = await loginUser({ email, password });
+		if (res.requestSuccessful) {
+			sessionStorage.setItem('token', res.accessToken);
+			setUserData({ ...res.UserInfo });
+
+			navigate('/', { replace: true });
+			setLoading(false);
+		} else if (res.message) {
+			setError(res.message.message);
+			setLoading(false);
+		} else {
+			setError(res.message);
+			setLoading(false);
+		}
+		// console.log(res.response.data);
 	}
 
 	return (
@@ -29,6 +55,11 @@ const Login = () => {
 					Please login to gain access to your account
 				</p>
 				<form onSubmit={handleSubmit} className='pt-16'>
+					{error && (
+						<p className='text-red-text font-bold first-letter:capitalize'>
+							{error}
+						</p>
+					)}
 					<LabelInput
 						label={'E-mail'}
 						name={'email'}
@@ -51,8 +82,23 @@ const Login = () => {
 					/>
 					<button
 						type='submit'
-						className='text-white bg-primary-700 rounded-lg w-full py-2 mt-[30px]'
+						disabled={loading}
+						className='text-white bg-primary-700 rounded-lg w-full py-2 mt-[30px] flex items-center justify-center'
 					>
+						{loading && (
+							<Oval
+								height={20}
+								width={20}
+								color='#F9F8F8'
+								wrapperStyle={{}}
+								wrapperClass=''
+								visible={true}
+								ariaLabel='oval-loading'
+								secondaryColor='#B3B3B3'
+								strokeWidth={2}
+								strokeWidthSecondary={2}
+							/>
+						)}
 						Sign Up
 					</button>
 				</form>

@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import UserSideBar from './UserSideBar';
 
 import {
@@ -11,13 +11,16 @@ import {
 import KanpaiLogo from '../components/icons/logo.svg?component';
 import { HiOutlineUsers as UsersIcon } from 'react-icons/hi';
 import { BsRecycle } from 'react-icons/bs';
+import AuthContext from '../context/AuthContext';
+import { useContext } from 'react';
 
 const Sidebar = () => {
-	// const [showChildren, setShowChildren] = useState(false);
-
-	// function addActive(e) {
-	// 	e.target.firstChild.firstChild.attributes.stroke.value;
-	// }
+	const navigate = useNavigate();
+	const { setUserData } = useContext(AuthContext);
+	function handleLogout() {
+		setUserData(null);
+		navigate('/auth');
+	}
 
 	return (
 		<section className='shadow-lg h-screen min-h-screen bg-white space-y-16 py-5 sm:py-8 overflow-y-auto lg:w-[90%]'>
@@ -70,14 +73,15 @@ const Sidebar = () => {
 					icon={<BsRecycle />}
 					title={'Recycle Bin'}
 				/>
-				<NavLink to={logout.link}>
-					<li className='flex items-center gap-3 text-sm sm:text-base py-2 px-3 sm:px-6 text-[#A65959] font-bold mt-5 sm:mt-10'>
-						<span className='text-lg sm:text-2xl text-inherit font-extrabold'>
-							{logout.icon}
-						</span>
-						{logout.title}
-					</li>
-				</NavLink>
+				<li
+					className='flex items-center gap-3 text-sm sm:text-base py-2 px-3 sm:px-6 text-[#A65959] font-bold mt-5 sm:mt-10'
+					onClick={handleLogout}
+				>
+					<span className='text-lg sm:text-2xl text-inherit font-extrabold'>
+						{logout.icon}
+					</span>
+					{logout.title}
+				</li>
 			</ul>
 		</section>
 	);
