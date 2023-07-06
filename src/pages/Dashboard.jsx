@@ -1,14 +1,68 @@
+import { useEffect } from 'react';
 import LineChart from '../components/Chart';
 import InfoStats from '../components/InfoStats';
 import InputFilter from '../components/InputFilter';
+import {
+	getSuppliersNum,
+	getDriversNum,
+	getBuyersNum,
+} from '../lib/apiEndPoints';
+import { useState } from 'react';
 
 const Dashboard = () => {
+	const [allUsersNum, setAllUsersNum] = useState({
+		drivers: '',
+		buyers: '',
+		suppliers: '',
+	});
+
+	useEffect(() => {
+		let mount = true;
+		const fetchAllNum = async () => {
+			const suppliers = await getSuppliersNum();
+			const buyers = await getBuyersNum();
+			const drivers = await getDriversNum();
+			if (
+				drivers.requestSucessful &&
+				buyers.requestSucessful &&
+				suppliers.requestSucessful
+			) {
+				setAllUsersNum({
+					...allUsersNum,
+					drivers: drivers.drivers,
+					buyers: buyers.buyers,
+					suppliers: suppliers.suppliers,
+				});
+			}
+		};
+
+		if (mount) {
+			fetchAllNum();
+		}
+
+		return () => {
+			mount = false;
+		};
+	}, []);
+
 	return (
 		<div className='mx-auto space-y-10'>
 			<div className='flex items-center justify-evenly gap-4 bg-primary-700 py-7 rounded-xl max-w-[95%] sm:w-auto mx-auto'>
-				<InfoStats title='buyers' number={600} />
-				<InfoStats title='sellers' number={427} rate={13} />
-				<InfoStats rate={22} title='truck drivers' />
+				<InfoStats
+					title='buyers'
+					number={allUsersNum.buyers && allUsersNum.buyers}
+					rate={null}
+				/>
+				<InfoStats
+					title='sellers'
+					number={allUsersNum.suppliers && allUsersNum.suppliers}
+					rate={null}
+				/>
+				<InfoStats
+					rate={null}
+					title='truck drivers'
+					number={allUsersNum.drivers && allUsersNum.drivers}
+				/>
 			</div>
 			{/* Chartjs */}
 			<LineChart />
@@ -44,24 +98,6 @@ const Dashboard = () => {
 											</tr>
 										</thead>
 										<tbody className='text-sm divide-y divide-gray-100'>
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
-											<TableData />
 											<TableData />
 										</tbody>
 									</table>

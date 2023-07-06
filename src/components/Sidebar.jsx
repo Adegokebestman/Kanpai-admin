@@ -20,6 +20,7 @@ const Sidebar = () => {
 	function handleLogout() {
 		setUserData(null);
 		navigate('/auth');
+		sessionStorage.removeItem('token');
 	}
 
 	return (

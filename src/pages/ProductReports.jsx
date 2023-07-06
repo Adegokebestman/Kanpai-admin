@@ -1,21 +1,46 @@
+import { useState } from 'react';
 import TableComponent from '../components/TableComponent';
 import { tableData } from '../lib/utils';
+import { useEffect } from 'react';
+import { getFlaggedProducts } from '../lib/apiEndPoints';
 
 const ProductReports = () => {
 	const { columns, dataArray } = tableData();
+	const [productFlagged, setProductFlagged] = useState([]);
+
+	useEffect(() => {
+		let mount = true;
+		async function fetch() {
+			const flagProducts = await getFlaggedProducts();
+			if (flagProducts.requestSucessful) {
+				setProductFlagged(flagProducts.flags);
+			}
+		}
+		if (mount) {
+			fetch();
+		}
+		return () => (mount = false);
+	}, []);
+
 	// ! this takes in a component that returns a function
 	// ?const actionsMemo = useMemo(() => <Export onExport={() => downloadCSV(data)} />, []);
 	// ? pass this as props //actions={actionsMemo}
 	return (
-		<article>
-			<TableComponent
-				columns={columns}
-				data={dataArray}
-				fixedHeader
-				selectableRows={false}
-				customStyles={customStyles}
-			/>
-		</article>
+		<>
+			{productFlagged.length < 1 ? (
+				<div>You do not have any Flagged Product Reported</div>
+			) : (
+				<article>
+					<TableComponent
+						columns={columns}
+						data={dataArray}
+						fixedHeader
+						selectableRows={false}
+						customStyles={customStyles}
+					/>
+				</article>
+			)}
+		</>
 	);
 };
 export default ProductReports;
