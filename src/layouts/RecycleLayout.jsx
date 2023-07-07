@@ -2,48 +2,50 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import InputFilter from '../components/InputFilter';
 import SquareBox from '../components/SquareBox';
+import { getSuspendedProducts, getSuspendedUsers } from '../lib/apiEndPoints';
 
 const RecycleLayout = () => {
-	const [totalSuspendedProducts, setTotalSuspendedProducts] = useState(1000);
-	const [totalSuspendedUsers, setTotalSuspendedUsers] = useState(2000);
-	const [displayVal, setDisplayVal] = useState();
+	const [displayVal, setDisplayVal] = useState(0);
+	const [tag, setTag] = useState('')
 
 	const navigate = useNavigate();
 	const location = useLocation();
 
 	useEffect(() => {
-		let mounted = true;
-
 		if (location.pathname === '/recycle') {
-			mounted = true;
-			setDisplayVal(totalSuspendedProducts);
-		} else {
-			mounted = false;
-		}
-
-		if (mounted) {
 			navigate('/recycle/products');
 		}
-		return () => {
-			mounted = false;
-		};
-	}, [location.pathname, navigate, totalSuspendedProducts]);
+	}, [location.pathname, navigate]);
 
 	useEffect(() => {
 		if (location.pathname === '/recycle/products') {
-			setDisplayVal(totalSuspendedProducts);
-		} else {
-			setDisplayVal(totalSuspendedUsers);
+			setTag('Products Suspended')
+			const fetch = async () => {
+				const data = await getSuspendedProducts();
+				if (data.requestSucessful) {
+					setDisplayVal(data.suspendedUsers.length);
+				}
+			};
+			fetch();
+		} else if (location.pathname === '/recycle/users') {
+			setTag('Users Suspended')
+			const fetch = async () => {
+				const data = await getSuspendedUsers();
+				if (data.requestSucessful) {
+					setDisplayVal(data.suspendedUsers.length);
+				}
+			};
+			fetch();
 		}
-	}, [location.pathname, totalSuspendedProducts, totalSuspendedUsers]);
+	}, [location.pathname]);
 
 	return (
 		<div>
 			<header className='flex flex-col-reverse gap-3 sm:flex-row items-center w-full justify-between'>
-				<InputFilter />
+				<InputFilter filter={false} />
 				<SquareBox
 					number={displayVal}
-					tag='Suspended'
+					tag={tag}
 					classnames='text-primary-700 border border-primary-700'
 				/>
 			</header>
