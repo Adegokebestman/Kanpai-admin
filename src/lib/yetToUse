@@ -1,0 +1,15 @@
+// const REGISTER_URL = 'create/RegisterUser';
+
+// const OTP_URL = 'auth/SendVerificationCode';
+// const OTP_VERIFY = 'auth/VerifyVerificationCode';
+
+// export async function registerUser(email__password) {
+// 	try {
+// 		const res = await instance.post(REGISTER_URL, email__password, {
+// 			excludeToken: true,
+// 		});
+// 		return res.data;
+// 	} catch (error) {
+// 		return error.response.data;
+// 	}
+// }

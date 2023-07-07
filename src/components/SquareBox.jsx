@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 const SquareBox = ({
-	number = 100,
+	number = 0,
 	tag = 'flags',
 	classnames = 'text-red-box',
 }) => {
