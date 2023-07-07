@@ -1,11 +1,13 @@
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { useEffect, useState } from 'react';
 
 export default function RootLayout() {
+	const token = sessionStorage.getItem('token');
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [screenSize, setScreenSize] = useState();
+
 	useEffect(() => {
 		const handleResize = () => setScreenSize(window.innerWidth);
 
@@ -17,7 +19,7 @@ export default function RootLayout() {
 	}, []);
 
 	useEffect(() => {
-		if (screenSize <= 1023) {
+		if (window.innerWidth <= 1023) {
 			setShowSidebar(true);
 		} else {
 			setShowSidebar(false);
@@ -45,7 +47,8 @@ export default function RootLayout() {
 				>
 					<Header setShowSidebar={setShowSidebar} />
 					<section className='p-3 md:py-4 md:pr-4 '>
-						<Outlet />
+						{/* <ProtectedRoute component={<Outlet />} /> */}
+						{token ? <Outlet /> : <Navigate to={'/auth'} />}
 					</section>
 				</main>
 			</div>

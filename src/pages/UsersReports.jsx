@@ -1,21 +1,42 @@
+import { useState } from 'react';
 import TableComponent from '../components/TableComponent';
 import { tableData } from '../lib/utils';
+import { getFlaggedUsers } from '../lib/apiEndPoints';
+import { useEffect } from 'react';
 
 const UsersReports = () => {
 	const { columns, dataArray } = tableData('users');
-	// ! this takes in a component that returns a function
-	// ?const actionsMemo = useMemo(() => <Export onExport={() => downloadCSV(data)} />, []);
-	// ? pass this as props //actions={actionsMemo}
+	const [productFlagged, setProductFlagged] = useState([]);
+
+	useEffect(() => {
+		let mount = true;
+		async function fetch() {
+			const flagProducts = await getFlaggedUsers();
+			if (flagProducts.requestSucessful) {
+				setProductFlagged(flagProducts.flags);
+			}
+		}
+		if (mount) {
+			fetch();
+		}
+		return () => (mount = false);
+	}, []);
 	return (
-		<article>
-			<TableComponent
-				columns={columns}
-				data={dataArray}
-				fixedHeader
-				selectableRows={false}
-				customStyles={customStyles}
-			/>
-		</article>
+		<>
+			{productFlagged.length < 1 ? (
+				<div>You do not have any Flagged User Reported</div>
+			) : (
+				<article>
+					<TableComponent
+						columns={columns}
+						data={dataArray}
+						fixedHeader
+						selectableRows={false}
+						customStyles={customStyles}
+					/>
+				</article>
+			)}
+		</>
 	);
 };
 export default UsersReports;

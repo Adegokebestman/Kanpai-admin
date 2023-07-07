@@ -1,13 +1,16 @@
 /* eslint-disable react/prop-types */
+import { useContext } from 'react';
 import NotificationIcon from './icons/notificationIcon.svg?component';
-import {AiOutlineMenu} from 'react-icons/ai'
+import { AiOutlineMenu } from 'react-icons/ai';
+import AuthContext from '../context/AuthContext';
 const Header = ({ setShowSidebar }) => {
+	const { userData } = useContext(AuthContext);
 	return (
 		<header className='h-[100px] py-6'>
 			<div className='flex items-center justify-between px-5 sm:px-10 lg:px-14'>
 				<div>
 					<h2 className='font-[500] text-lg sm:text-2xl capitalize'>
-						Hello Admin,
+						{userData && userData.name}
 					</h2>
 					<p className='text-sm lg:text-base hidden text-gray-400 lg:block'>
 						Welcome to your dashboard
@@ -17,14 +20,14 @@ const Header = ({ setShowSidebar }) => {
 					<aside className='flex items-center justify-evenly '>
 						<div className='h-10 w-10 bg-green-bg rounded-full border border-blue overflow-hidden'>
 							<img
-								src='https://source.unsplash.com/100x100/?portrait'
-								alt='profile image of user'
+								src={userData && userData.userImage}
+								alt={userData && userData.name}
 								className='w-full h-full'
 							/>
 						</div>
 						<div className='flex-col pl-3 items-start justify-between hidden sm:flex'>
 							<h4 className='font-semibold text-gray-500 capitalize leading-4 text-sm sm:text-sm'>
-								User Name
+								{userData && userData.name}
 							</h4>
 							<p className='text-gray-300 capitalize font-medium text-sm lg:text-sm'>
 								Admin
