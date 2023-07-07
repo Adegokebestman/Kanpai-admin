@@ -4,69 +4,77 @@ import { getFlaggedUsers, getUserDetails } from '../lib/apiEndPoints';
 import { NavLink } from 'react-router-dom';
 
 const UsersReports = () => {
-	const [dataArray, setDataArray] = useState([]);
-	const [productFlagged, setProductFlagged] = useState([]);
+  const [dataArray, setDataArray] = useState([]);
+  const [productFlagged, setProductFlagged] = useState([]);
 
-	useEffect(() => {
-		let mount = true;
-		async function fetch() {
-			const flagProducts = await getFlaggedUsers();
+  useEffect(() => {
+    let mount = true;
 
-			if (flagProducts.requestSucessful) {
-				setProductFlagged(flagProducts.flags);
-				flagProducts.flags.forEach(async (element) => {
-					const res = await getUserDetails(element.flaggedId);
+    const fetchFlaggedUsers = async () => {
+      const flagUsers = await getFlaggedUsers();
 
-					if (res.requestSucessful) {
-						const date = new Date(element.createdAt);
-						const day = date.getDate();
-						const month = date.getMonth() + 1; // Months are zero-indexed
-						const year = date.getFullYear();
+      if (flagUsers.requestSucessful) {
+        setProductFlagged(flagUsers.flags);
 
-						// Formatting the date as "dd/mm/yyyy"
-						const formattedDate = `${day
-							.toString()
-							.padStart(2, '0')}/${month
-							.toString()
-							.padStart(2, '0')}/${year}`;
+        const tempArray = []; // Temporary array to accumulate the data objects
 
-						const object = {
-							id: element.flaggedId,
-							img: res.userInfo.photo,
-							suppliersName:
-								res.userInfo.name + ' ' + res.userInfo.lastName,
-							suppliersEmail: res.userInfo.email,
-							date: formattedDate,
-							flagged:
-								element.status == 'open' ? 'flagged' : 'closed',
-						};
-						setDataArray([object]);
-					}
-				});
-			}
-		}
-		if (mount) {
-			fetch();
-		}
-		return () => {
-			mount = false;
-		};
-	}, [productFlagged.flaggedId]);
-	return (
-		<>
-			<article>
-				<TableComponent
-					columns={columns}
-					data={dataArray}
-					fixedHeader
-					selectableRows={false}
-					customStyles={customStyles}
-				/>
-			</article>
-		</>
-	);
+        for (const element of flagUsers.flags) {
+          const res = await getUserDetails(element.flaggedId);
+
+          if (res.requestSucessful) {
+            const date = new Date(element.createdAt);
+            const day = date.getDate();
+            const month = date.getMonth() + 1; // Months are zero-indexed
+            const year = date.getFullYear();
+
+            // Formatting the date as "dd/mm/yyyy"
+            const formattedDate = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+
+            const object = {
+              id: element.flaggedId,
+              img: res.userInfo.photo,
+              suppliersName: res.userInfo.name + ' ' + res.userInfo.lastName,
+              suppliersEmail: res.userInfo.email,
+              date: formattedDate,
+              flagged: element.status === 'open' ? 'flagged' : 'closed',
+            };
+
+            tempArray.push(object);
+          }
+        }
+
+        setDataArray(tempArray); // Set the accumulated data objects in dataArray
+      }
+    };
+
+    if (mount) {
+      fetchFlaggedUsers();
+    }
+
+    return () => {
+      mount = false;
+    };
+  }, []);
+
+  return (
+    <>
+      <article>
+        <TableComponent
+          columns={columns}
+          data={dataArray}
+          fixedHeader
+          selectableRows={false}
+          customStyles={customStyles}
+        />
+      </article>
+    </>
+  );
 };
+
 export default UsersReports;
+
+// Rest of the code remains the same...
+
 
 const columns = [
 	{
