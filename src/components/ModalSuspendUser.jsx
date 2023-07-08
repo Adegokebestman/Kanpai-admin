@@ -3,12 +3,30 @@ import { useState } from 'react';
 import CancelIcon from './icons/cancelIcon.svg?component';
 import ModalSuccess from './ModalSuccess';
 
-const ModalSuspendUser = ({ setIsOpenSuspension }) => {
+const ModalSuspendUser = ({
+	setIsOpenSuspension,
+	flagId,
+	userId,
+	action,
+	productId,
+}) => {
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [selected, setSelected] = useState('');
+	const [reason, setReason] = useState('');
 
-	function suspendUser() {
-		setShowSuccess(true);
+	async function suspendUser() {
+		const res = await action({
+			flagId,
+			productId,
+			userId,
+			reason,
+			suspensionExpiresAt: selected,
+		});
+		if (res.requestSucessful) {
+			setSelected('');
+			setReason('');
+			setShowSuccess(true);
+		}
 	}
 	return (
 		<>
@@ -32,19 +50,19 @@ const ModalSuspendUser = ({ setIsOpenSuspension }) => {
 						>
 							<option defaultValue='select'>Select</option>
 							<option
-								value='oneWeek'
+								value={10080}
 								className='bg-red-300 text-black'
 							>
 								One Week
 							</option>
 							<option
-								value='oneMonth'
+								value={259200}
 								className='bg-red-300 text-black'
 							>
 								One Month
 							</option>
 							<option
-								value='sixMonth'
+								value={263577}
 								className='bg-red-300 text-black'
 							>
 								Six Month
@@ -57,7 +75,11 @@ const ModalSuspendUser = ({ setIsOpenSuspension }) => {
 							<span className='text-primary-700'>userEmail</span>{' '}
 							? (optional)
 						</h3>
-						<textarea className='w-full bg-gray-200 border border-gray-300 rounded-xl p-3 outline-none min-h-[120px] mt-4 font-normal' />
+						<textarea
+							value={reason}
+							onChange={(e) => setReason(e.target.value)}
+							className='w-full bg-gray-200 border border-gray-300 rounded-xl p-3 outline-none min-h-[120px] mt-4 font-normal'
+						/>
 					</div>
 					<div className='flex items-center justify-around gap-10'>
 						<button

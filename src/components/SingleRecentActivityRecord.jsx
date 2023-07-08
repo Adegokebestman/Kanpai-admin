@@ -1,36 +1,41 @@
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useContext, useState } from 'react';
 
 import ImageElement from './ImageElement';
 import Option from './icons/optionsIcon.svg?component';
 import SingleRecentActivitiesDetailedRecord from './SingleRecentActivitiesDetailedRecord';
+import OtherContext from '../context/OtherContext';
+import moment from 'moment';
 
-const SingleRecentActivityRecord = () => {
+const SingleRecentActivityRecord = ({ activity }) => {
 	const [openOptions, setOpenOptions] = useState(false);
-
-	let srcImg = 'https://source.unsplash.com/400x400/?portrait';
+	const { userReportUser } = useContext(OtherContext);
+	const formattedDate = moment(userReportUser.createdAt).format('DD/MM/YYYY');
 	return (
-		<section>
+		<section className='w-full'>
 			<div
-				className={`flex p-2 sm:px-8 items-center justify-between  sm:gap-4 hover:shadow text-black ${
+				className={`flex p-2 sm:px-8 items-center justify-between  sm:gap-4 hover:shadow text-black w-full ${
 					openOptions && 'bg-gray-200'
 				}`}
 			>
 				<div className='hidden sm:block w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden'>
-					<ImageElement imgSrc={srcImg} />
+					<ImageElement
+						imgSrc={userReportUser.photo}
+						imgTitle={userReportUser.name}
+					/>
 				</div>
 				<div className='hidden sm:block lg:mr-5'>
 					<h2 className='font-bold text-sm lg:text-base'>
-						Store or User
+						{userReportUser.lastName + ' ' + userReportUser.name}
 					</h2>
-					<p className='text-xs lg:text-sm'>EmailOfUserHere</p>
+					<p className='text-xs lg:text-sm'>{userReportUser.email}</p>
 				</div>
 				<div className='flex items-center justify-between flex-1'>
 					<p className='text-left px-4 text-xs sm:text-sm'>
-						Just the main heading or the summary of the event that
-						occurred
+						{activity.activity}
 					</p>
 					<div className='flex items-center text-xs sm:text-sm'>
-						<p className='hidden sm:block'>occurrence</p>
+						<p className='hidden sm:block'>{formattedDate}</p>
 						<span
 							className='p-2 rounded-full bg-gray-50 ml-2 sm:ml-4 cursor-pointer'
 							onClick={() => setOpenOptions(!openOptions)}
@@ -40,11 +45,11 @@ const SingleRecentActivityRecord = () => {
 					</div>
 				</div>
 			</div>
-			{openOptions && (
+			{/* {openOptions && (
 				<SingleRecentActivitiesDetailedRecord
 					openOptions={openOptions}
 				/>
-			)}
+			)} */}
 		</section>
 	);
 };

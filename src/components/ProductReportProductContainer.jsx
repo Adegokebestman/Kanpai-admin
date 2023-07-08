@@ -4,10 +4,10 @@ import EditIcon from './icons/editIcon.svg?component';
 import DeleteIcon from './icons/deleteIcon.svg?component';
 
 const ProductReportProductContainer = ({
-	productName = 'Cardbuary Bournvita',
-	productImage = 'https://source.unsplash.com/400x400/?portrait',
-	productPrice = 200,
-	productAvailability = 90,
+	productName,
+	productImage,
+	productPrice,
+	productAvailability,
 	openDelete,
 	openEdit,
 }) => {

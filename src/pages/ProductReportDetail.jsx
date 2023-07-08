@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ProductReportDetailHeader from '../components/ProductReportDetailHeader';
 import ProductReportProductContainer from '../components/ProductReportProductContainer';
@@ -9,44 +9,140 @@ import GeneralModal from '../components/GeneralModal';
 import ModalDelete from '../components/ModalDelete';
 import ModalEditProduct from '../components/ModalEditProduct';
 import TableComponent from '../components/TableComponent';
-// import { tableData } from '../lib/utils';
+import { useParams } from 'react-router-dom';
+import {
+	getAllProductOrders,
+	getFlagItem,
+	getProductDetails,
+	suspendAProduct,
+} from '../lib/apiEndPoints';
+import { Oval } from 'react-loader-spinner';
+import moment from 'moment';
+import ModalSuspendUser from '../components/ModalSuspendUser';
 
 const ProductReportDetail = () => {
 	const [openDelete, setOpenDelete] = useState(false);
+	const [dataArray, setDataArray] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [reports, setReports] = useState();
 	const [isEdit, setIsEdit] = useState(false);
+	const [productDetail, setProductDetail] = useState();
+	const { id } = useParams();
+
+	useEffect(() => {
+		const fetch = async () => {
+			setLoading(true);
+			const data = await getFlagItem(id);
+			if (data.requestSucessful) {
+				setReports(data.flag);
+				const { product } = await getProductDetails(
+					data.flag.flaggedId
+				);
+				setProductDetail(product);
+
+				const fetchFlaggedProducts = async () => {
+					const allOrders = await getAllProductOrders(
+						data.flag.flaggedId
+					);
+
+					if (allOrders.requestSucessful) {
+						for (const element of allOrders.orders) {
+							const formattedDate = moment(
+								element.createdAt
+							).format('DD/MM/YYYY');
+							const object = {
+								id: element._id,
+								productName: element.productName,
+								price: element.price,
+								quantity: element.minOrderAmount,
+								date: formattedDate,
+								status: element.status
+									? 'Pending'
+									: 'Delivered',
+							};
+							setDataArray([object]); // Set the accumulated data objects in dataArray
+						}
+					}
+					setLoading(false);
+				};
+
+				fetchFlaggedProducts();
+			}
+		};
+		fetch();
+	}, [dataArray.length, id]);
+
 	return (
-		<section className='space-y-6'>
-			<ProductReportDetailHeader />
-
-			<section className='overflow-hidden space-y-16 border border-gray-100 rounded-t-2xl pb-20'>
-				<ProductReportProductContainer
-					openDelete={setOpenDelete}
-					openEdit={setIsEdit}
+		<>
+			{loading ? (
+				<Oval
+					height={80}
+					width={80}
+					color='#F9F8F8'
+					wrapperStyle={{}}
+					wrapperClass='bg-gray-fade w-full flex items-center justify-center h-full py-20'
+					visible={true}
+					ariaLabel='oval-loading'
+					secondaryColor='#B3B3B3'
+					strokeWidth={2}
+					strokeWidthSecondary={2}
 				/>
+			) : (
+				<section className='space-y-6'>
+					{productDetail && (
+						<ProductReportDetailHeader
+							id={productDetail.createdBy}
+						/>
+					)}
 
-				<ReportComplaintContainer />
-				<InputFilter action={'Recent Activities'} />
+					<section className='overflow-hidden space-y-16 border border-gray-100 rounded-t-2xl pb-20'>
+						{productDetail && (
+							<ProductReportProductContainer
+								openDelete={setOpenDelete}
+								openEdit={setIsEdit}
+								productImage={productDetail.photo}
+								productAvailability={productDetail.available}
+								productName={productDetail.productName}
+								productPrice={productDetail.price}
+							/>
+						)}
 
-				<GeneralModal isOpen={openDelete} setIsOpen={setOpenDelete}>
-					<ModalDelete
-						setOpenDelete={setOpenDelete}
-						value={'Product'}
-					/>
-				</GeneralModal>
+						{reports && (
+							<ReportComplaintContainer
+								reports={reports.reports}
+								productId={reports.flaggedId}
+							/>
+						)}
 
-				<GeneralModal isOpen={isEdit} setIsOpen={setIsEdit}>
-					<ModalEditProduct setOpenDelete={setIsEdit} />
-				</GeneralModal>
+						<InputFilter action={'Recent Activities'} />
 
-				<TableComponent
-					columns={columns}
-					data={dataArray}
-					fixedHeader
-					selectableRows={false}
-					customStyles={customStyles}
-				/>
-			</section>
-		</section>
+						<GeneralModal
+							isOpen={openDelete}
+							setIsOpen={setOpenDelete}
+						>
+							<ModalSuspendUser
+								setIsOpenSuspension={setOpenDelete}
+								flagId={id}
+								productId={productDetail && productDetail._id}
+								action={suspendAProduct}
+							/>
+						</GeneralModal>
+
+						<GeneralModal isOpen={isEdit} setIsOpen={setIsEdit}>
+							<ModalEditProduct setOpenDelete={setIsEdit} />
+						</GeneralModal>
+
+						<TableComponent
+							columns={columns}
+							data={dataArray}
+							fixedHeader
+							selectableRows={false}
+							customStyles={customStyles}
+						/>
+					</section>
+				</section>
+			)}
+		</>
 	);
 };
 export default ProductReportDetail;
@@ -71,38 +167,11 @@ const columns = [
 		selector: (row) => row.date,
 	},
 	{
-		name: 'Buyer',
-		selector: (row) => row.buyer,
-	},
-	{
 		name: 'Status',
 		selector: (row) => row.status,
 		sortable: true,
 	},
 ];
-
-const dataArray = [];
-
-for (let i = 0; i < 30; i++) {
-	const price = i * 1000;
-	const quantity = (i * 1000) / 3;
-	const productName = `Product ${i + 1}`;
-	const buyer = `Buyer${i + 1}`;
-	const id = i + 1;
-	const date = Date.now() + 1;
-
-	const object = {
-		id: id,
-		price,
-		productName: productName,
-		buyer,
-		date,
-		status: i % 2 == 0 ? 'Pending' : 'Delivered',
-		quantity,
-	};
-
-	dataArray.push(object);
-}
 
 const customStyles = {
 	headRow: {

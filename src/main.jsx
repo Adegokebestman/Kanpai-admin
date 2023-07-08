@@ -48,6 +48,7 @@ import DriverDetails from './pages/DriverDetails';
 import DriverActivities from './pages/DriverActivities';
 import { ChatProvider } from './context/ChatContext';
 import { AuthProvider } from './context/AuthContext';
+import { OtherProvider } from './context/OtherContext';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -123,9 +124,11 @@ Modal.setAppElement('#root');
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
 		<AuthProvider>
-			<ChatProvider>
-				<RouterProvider router={router} />
-			</ChatProvider>
+			<OtherProvider>
+				<ChatProvider>
+					<RouterProvider router={router} />
+				</ChatProvider>
+			</OtherProvider>
 		</AuthProvider>
 	</React.StrictMode>
 );
