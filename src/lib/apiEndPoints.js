@@ -1,12 +1,12 @@
 import axios from 'axios';
 // Token
-const token = sessionStorage.getItem('token');
 
 const instance = axios.create({
 	baseURL: 'https://kampai-backend.onrender.com/',
 });
 
 instance.interceptors.request.use((config) => {
+	const token = sessionStorage.getItem('token');
 	if (!config.excludeToken) {
 		// Add the Bearer token to the headers
 		config.headers['Authorization'] = `Bearer ${token}`;
@@ -66,6 +66,7 @@ const FLAGGED_PRODUCTS = 'admin/flags/getAllProductFlags';
 const TOTAL_FLAGGED_PRODUCTS = 'admin/flags/getTotalProductFlags';
 const FLAGGED_USERS = 'admin/flags/getAllUserFlags';
 const TOTAL_FLAGGED_USERS = 'admin/flags/getTotalUserFlags';
+const FLAG_ITEM = 'admin/flags/getFlagById';
 
 export async function getFlaggedProducts() {
 	//used
@@ -82,6 +83,10 @@ export async function getFlaggedUsers() {
 export async function getTotalFlaggedUserNumbers() {
 	//used
 	return await reports('', TOTAL_FLAGGED_USERS);
+}
+export async function getFlagItem(flagId) {
+	//used
+	return await reports('post', FLAG_ITEM, { flagId });
 }
 
 // Analytics
@@ -144,4 +149,15 @@ export async function getProductDetails(productId) {
 }
 export async function getUserDetails(productId) {
 	return await reports('', USER_DETAILS, '', productId);
+}
+
+// Activities
+const USER_ACTIVITY = 'admin/users/getUserActivities';
+const PRODUCT_ACTIVITY = 'admin/products/getAllProductOrders';
+
+export async function getUserActivities(userId) {
+	return await reports('post', USER_ACTIVITY, { userId });
+}
+export async function getAllProductOrders(productId) {
+	return await reports('post', PRODUCT_ACTIVITY, { productId });
 }

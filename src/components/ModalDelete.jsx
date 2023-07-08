@@ -4,12 +4,17 @@ import { useState } from 'react';
 import CancelIcon from './icons/cancelIcon.svg?component';
 import ModalSuccess from './ModalSuccess';
 
-const ModalDelete = ({ setOpenDelete, value, recycle }) => {
+const ModalDelete = ({ setOpenDelete, value, recycle, action }) => {
 	// click delete sends a request to delete the data
 	const [deleted, setDeleted] = useState(false);
 
 	const deleteProduct = () => {
-		setDeleted(true);
+		if (action) {
+			const data = action();
+			if (data.requestSucessful) {
+				setDeleted(true);
+			}
+		}
 	};
 	return (
 		<article className='space-y-8'>

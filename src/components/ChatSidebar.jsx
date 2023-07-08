@@ -10,7 +10,7 @@ const ChatSidebar = () => {
 	return (
 		<section
 			className={`absolute z-50 top-0 left-0 md:relative md:w-[300px] w-full border border-gray-200 rounded-2xl overflow-hidden bg-white max-h-full ${
-				userToChat.username ? 'hidden md:block' : ''
+				userToChat._id ? 'hidden md:block' : ''
 			} `}
 		>
 			<header className='border-b border-gray-200 p-3 mx-auto w-full h-[70px]'>

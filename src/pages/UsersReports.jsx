@@ -1,80 +1,86 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import TableComponent from '../components/TableComponent';
 import { getFlaggedUsers, getUserDetails } from '../lib/apiEndPoints';
 import { NavLink } from 'react-router-dom';
+import moment from 'moment';
+import OtherContext from '../context/OtherContext';
 
 const UsersReports = () => {
-  const [dataArray, setDataArray] = useState([]);
-  const [productFlagged, setProductFlagged] = useState([]);
+	const [dataArray, setDataArray] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const { setUserReportUser } = useContext(OtherContext);
 
-  useEffect(() => {
-    let mount = true;
+	useEffect(() => {
+		let mount = true;
+		setUserReportUser(null);
 
-    const fetchFlaggedUsers = async () => {
-      const flagUsers = await getFlaggedUsers();
+		const fetchFlaggedUsers = async () => {
+			if (dataArray.length < 1) {
+				setLoading(true);
+			}
+			const flagUsers = await getFlaggedUsers();
 
-      if (flagUsers.requestSucessful) {
-        setProductFlagged(flagUsers.flags);
+			if (flagUsers.requestSucessful) {
+				const tempArray = []; // Temporary array to accumulate the data objects
 
-        const tempArray = []; // Temporary array to accumulate the data objects
+				for (const element of flagUsers.flags) {
+					const res = await getUserDetails(element.flaggedId);
 
-        for (const element of flagUsers.flags) {
-          const res = await getUserDetails(element.flaggedId);
+					if (res.requestSucessful) {
+						const formattedDate = moment(element.createdAt).format(
+							'DD/MM/YYYY'
+						);
 
-          if (res.requestSucessful) {
-            const date = new Date(element.createdAt);
-            const day = date.getDate();
-            const month = date.getMonth() + 1; // Months are zero-indexed
-            const year = date.getFullYear();
+						const object = {
+							id: element._id,
+							img: res.userInfo.photo,
+							suppliersName:
+								res.userInfo.name + ' ' + res.userInfo.lastName,
+							suppliersEmail: res.userInfo.email,
+							date: formattedDate,
+							flagged:
+								element.status === 'open'
+									? 'flagged'
+									: 'closed',
+						};
 
-            // Formatting the date as "dd/mm/yyyy"
-            const formattedDate = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+						tempArray.push(object);
+					}
+				}
 
-            const object = {
-              id: element.flaggedId,
-              img: res.userInfo.photo,
-              suppliersName: res.userInfo.name + ' ' + res.userInfo.lastName,
-              suppliersEmail: res.userInfo.email,
-              date: formattedDate,
-              flagged: element.status === 'open' ? 'flagged' : 'closed',
-            };
+				setDataArray(tempArray);
+				setLoading(false); // Set the accumulated data objects in dataArray
+			}
+		};
 
-            tempArray.push(object);
-          }
-        }
+		if (mount) {
+			fetchFlaggedUsers();
+		}
 
-        setDataArray(tempArray); // Set the accumulated data objects in dataArray
-      }
-    };
+		return () => {
+			mount = false;
+		};
+	}, [dataArray.length, setUserReportUser]);
 
-    if (mount) {
-      fetchFlaggedUsers();
-    }
-
-    return () => {
-      mount = false;
-    };
-  }, []);
-
-  return (
-    <>
-      <article>
-        <TableComponent
-          columns={columns}
-          data={dataArray}
-          fixedHeader
-          selectableRows={false}
-          customStyles={customStyles}
-        />
-      </article>
-    </>
-  );
+	return (
+		<>
+			<article>
+				<TableComponent
+					columns={columns}
+					data={dataArray}
+					fixedHeader
+					selectableRows={false}
+					customStyles={customStyles}
+					progressPending={loading}
+				/>
+			</article>
+		</>
+	);
 };
 
 export default UsersReports;
 
 // Rest of the code remains the same...
-
 
 const columns = [
 	{
@@ -93,7 +99,7 @@ const columns = [
 	{
 		name: 'Suppliers Name',
 		selector: (row) => (
-			<NavLink to={`${row.id.toString()}`} className='text-xs sm:text-md'>
+			<NavLink to={`${row.id}`} className='text-xs sm:text-md'>
 				{row.suppliersName}
 			</NavLink>
 		),
@@ -115,7 +121,7 @@ const columns = [
 		name: '',
 		selector: (row) => (
 			<NavLink
-				to={`${row.id.toString()}`}
+				to={`${row.id}`}
 				className='bg-red-bg text-red-text px-4 py-2 rounded-full block capitalize text-xs sm:text-md'
 			>
 				{row.flagged}
