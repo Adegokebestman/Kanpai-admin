@@ -86,7 +86,7 @@ const BuyerProfile = () => {
 				<div>
 					{isEditing ? (
 						<input
-							className='border border-white sidebar rounded-lg p-2 mb-2'
+							className='border border-primary-700 sidebar rounded-lg p-2 mb-2'
 							type='text'
 							name='name'
 							placeholder='Name'
@@ -108,7 +108,7 @@ const BuyerProfile = () => {
 					<div>
 						{isEditing ? (
 							<input
-								className='border border-white sidebar rounded-lg p-2 mb-2'
+								className='border border-primary-700 sidebar rounded-lg p-2 mb-2'
 								type='number'
 								placeholder='Phone Number'
 								name='phone'

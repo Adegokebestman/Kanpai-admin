@@ -119,6 +119,7 @@ export async function getSuspendedProducts() {
 	return await reports('', SUSPENDED_PRODUCTS);
 }
 export async function suspendAProduct(data) {
+	//used
 	return await reports('post', SUSPEND_PRODUCT, data);
 }
 export async function unSuspendAProduct(productId) {
@@ -134,6 +135,7 @@ export async function getSuspendedUsers() {
 	return await reports('', SUSPENDED_USERS);
 }
 export async function suspendAUser(data) {
+	//used
 	return await reports('post', SUSPEND_USER, data);
 }
 export async function unSuspendAUser(productId) {
@@ -145,10 +147,12 @@ const PRODUCT_DETAILS = 'products/getProduct';
 const USER_DETAILS = 'users/getUserDetails';
 
 export async function getProductDetails(productId) {
+	//used
 	return await reports('', PRODUCT_DETAILS, '', productId);
 }
-export async function getUserDetails(productId) {
-	return await reports('', USER_DETAILS, '', productId);
+export async function getUserDetails(userId) {
+	//used
+	return await reports('', USER_DETAILS, '', userId);
 }
 
 // Activities
@@ -156,8 +160,10 @@ const USER_ACTIVITY = 'admin/users/getUserActivities';
 const PRODUCT_ACTIVITY = 'admin/products/getAllProductOrders';
 
 export async function getUserActivities(userId) {
+	//used
 	return await reports('post', USER_ACTIVITY, { userId });
 }
 export async function getAllProductOrders(productId) {
+	//used
 	return await reports('post', PRODUCT_ACTIVITY, { productId });
 }

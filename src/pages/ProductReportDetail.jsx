@@ -6,7 +6,6 @@ import ProductReportProductContainer from '../components/ProductReportProductCon
 import ReportComplaintContainer from '../components/ReportComplaintContainer';
 import InputFilter from '../components/InputFilter';
 import GeneralModal from '../components/GeneralModal';
-import ModalDelete from '../components/ModalDelete';
 import ModalEditProduct from '../components/ModalEditProduct';
 import TableComponent from '../components/TableComponent';
 import { useParams } from 'react-router-dom';

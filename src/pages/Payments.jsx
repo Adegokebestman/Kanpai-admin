@@ -21,7 +21,6 @@ const Payments = () => {
 			// sortable: true,
 		},
 
-
 		{
 			name: '',
 			selector: (row) => row.date,
@@ -38,9 +37,9 @@ const Payments = () => {
 			name: '',
 			selector: (row) => (
 				<NavLink to={`${row.id.toString()}`}>
-				<button className='border-red-text border text-red-200 px-3 py-2 rounded-full'>
-					{row.decline}
-				</button>
+					<button className='border-red-text border text-red-200 px-3 py-2 rounded-full'>
+						{row.decline}
+					</button>
 				</NavLink>
 			),
 		},
@@ -55,7 +54,6 @@ const Payments = () => {
 		const date = new Date().toLocaleDateString('en-US');
 		const id = i + 1;
 
-
 		const object = {
 			id: id,
 			userName: userName,
@@ -69,22 +67,22 @@ const Payments = () => {
 		dataArray.push(object);
 	}
 
-	return <div className='border-[1px] rounded-xl border-gray-900 mx-auto md:w-[95%] py-10'>
-		<div className='flex justify-center'>
-		<InputFilter action={'Pay Out Requests'}/>
-		</div>
-		<TableComponent
+	return (
+		<div className='border-[1px] rounded-xl border-gray-900 mx-auto md:w-[95%] py-10'>
+			<div className='flex justify-center'>
+				<InputFilter action={'Pay Out Requests'} filter={false} />
+			</div>
+			<TableComponent
 				columns={columns}
 				data={dataArray}
 				fixedHeader
 				selectableRows={false}
 				customStyles={customStyles}
 			/>
-
-	</div>;
+		</div>
+	);
 };
 export default Payments;
-
 
 const customStyles = {
 	rows: {
@@ -112,4 +110,3 @@ const customStyles = {
 		},
 	},
 };
-

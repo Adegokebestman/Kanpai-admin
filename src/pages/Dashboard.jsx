@@ -7,14 +7,11 @@ import {
 	getDriversNum,
 	getBuyersNum,
 } from '../lib/apiEndPoints';
-import { useState } from 'react';
+import { useContext } from 'react';
+import OtherContext from '../context/OtherContext';
 
 const Dashboard = () => {
-	const [allUsersNum, setAllUsersNum] = useState({
-		drivers: '',
-		buyers: '',
-		suppliers: '',
-	});
+	const { usersNumbers, setUsersNumbers } = useContext(OtherContext);
 
 	useEffect(() => {
 		let mount = true;
@@ -27,8 +24,9 @@ const Dashboard = () => {
 				buyers.requestSucessful &&
 				suppliers.requestSucessful
 			) {
-				setAllUsersNum({
-					...allUsersNum,
+				//set to context
+				setUsersNumbers({
+					...usersNumbers,
 					drivers: drivers.drivers,
 					buyers: buyers.buyers,
 					suppliers: suppliers.suppliers,
@@ -50,18 +48,18 @@ const Dashboard = () => {
 			<div className='flex items-center justify-evenly gap-4 bg-primary-700 py-7 rounded-xl max-w-[95%] sm:w-auto mx-auto'>
 				<InfoStats
 					title='buyers'
-					number={allUsersNum.buyers && allUsersNum.buyers}
+					number={usersNumbers.buyers && usersNumbers.buyers}
 					rate={null}
 				/>
 				<InfoStats
 					title='sellers'
-					number={allUsersNum.suppliers && allUsersNum.suppliers}
+					number={usersNumbers.suppliers && usersNumbers.suppliers}
 					rate={null}
 				/>
 				<InfoStats
 					rate={null}
 					title='truck drivers'
-					number={allUsersNum.drivers && allUsersNum.drivers}
+					number={usersNumbers.drivers && usersNumbers.drivers}
 				/>
 			</div>
 			{/* Chartjs */}

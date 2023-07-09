@@ -49,68 +49,258 @@ import DriverActivities from './pages/DriverActivities';
 import { ChatProvider } from './context/ChatContext';
 import { AuthProvider } from './context/AuthContext';
 import { OtherProvider } from './context/OtherContext';
+import Auth from './components/Auth';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route errorElement={<ErrorPage />}>
-			<Route path='/' element={<RootLayout />}>
-				<Route index element={<Dashboard />} />
+			<Route
+				path='/'
+				element={
+					<Auth>
+						<RootLayout />
+					</Auth>
+				}
+			>
+				<Route
+					index
+					element={
+						<Auth>
+							<Dashboard />
+						</Auth>
+					}
+				/>
 
-				<Route path='users/buyers' element={<BuyersLayout />}>
-					<Route index element={<Buyers />} />
-					<Route path=':id' element={<BuyerDetails />} />
+				<Route
+					path='users/buyers'
+					element={
+						<Auth>
+							<BuyersLayout />
+						</Auth>
+					}
+				>
+					<Route
+						index
+						element={
+							<Auth>
+								<Buyers />
+							</Auth>
+						}
+					/>
+					<Route
+						path=':id'
+						element={
+							<Auth>
+								<BuyerDetails />
+							</Auth>
+						}
+					/>
 					<Route
 						path='activities/:id'
-						element={<BuyerActivities />}
+						element={
+							<Auth>
+								<BuyerActivities />
+							</Auth>
+						}
 					/>
 				</Route>
 
-				<Route path='users/sellers' element={<SellersLayout />}>
-					<Route index element={<Sellers />} />
-					<Route path=':id' element={<SellerDetails />} />
+				<Route
+					path='users/sellers'
+					element={
+						<Auth>
+							<SellersLayout />
+						</Auth>
+					}
+				>
+					<Route
+						index
+						element={
+							<Auth>
+								<Sellers />
+							</Auth>
+						}
+					/>
+					<Route
+						path=':id'
+						element={
+							<Auth>
+								<SellerDetails />
+							</Auth>
+						}
+					/>
 					<Route
 						path='activities/:id'
-						element={<SellerActivities />}
+						element={
+							<Auth>
+								<SellerActivities />
+							</Auth>
+						}
 					/>
-					<Route path='inventory/:id' element={<SellerInventory />} />
+					<Route
+						path='inventory/:id'
+						element={
+							<Auth>
+								<SellerInventory />
+							</Auth>
+						}
+					/>
 				</Route>
 
 				<Route
 					path='users/truck-drivers'
-					element={<TruckDriversLayout />}
+					element={
+						<Auth>
+							<TruckDriversLayout />
+						</Auth>
+					}
 				>
-					<Route index element={<TruckDriver />} />
-					<Route path=':id' element={<DriverDetails />} />
+					<Route
+						index
+						element={
+							<Auth>
+								<TruckDriver />
+							</Auth>
+						}
+					/>
+					<Route
+						path=':id'
+						element={
+							<Auth>
+								<DriverDetails />
+							</Auth>
+						}
+					/>
 					<Route
 						path='activities/:id'
-						element={<DriverActivities />}
+						element={
+							<Auth>
+								<DriverActivities />
+							</Auth>
+						}
 					/>
 				</Route>
 
-				<Route path='reports' element={<ReportsLayout />}>
-					<Route path='products' element={<ProductReports />} />
-					<Route path='users' element={<UsersReports />} />
+				<Route
+					path='reports'
+					element={
+						<Auth>
+							<ReportsLayout />
+						</Auth>
+					}
+				>
+					<Route
+						path='products'
+						element={
+							<Auth>
+								<ProductReports />
+							</Auth>
+						}
+					/>
+					<Route
+						path='users'
+						element={
+							<Auth>
+								<UsersReports />
+							</Auth>
+						}
+					/>
 				</Route>
 
 				<Route
 					path='reports/products/:id'
-					element={<ProductReportDetail />}
+					element={
+						<Auth>
+							<ProductReportDetail />
+						</Auth>
+					}
 				/>
-				<Route path='reports/users/:id' element={<UsersReportLayout />}>
-					<Route index element={<UserReportDetail />} />
-					<Route path={':userId'} element={<UserReportUser />} />
+				<Route
+					path='reports/users/:id'
+					element={
+						<Auth>
+							<UsersReportLayout />
+						</Auth>
+					}
+				>
+					<Route
+						index
+						element={
+							<Auth>
+								<UserReportDetail />
+							</Auth>
+						}
+					/>
+					<Route
+						path={':userId'}
+						element={
+							<Auth>
+								<UserReportUser />
+							</Auth>
+						}
+					/>
 				</Route>
 
-				<Route path='live-chat' element={<LiveChat />} />
-				<Route path='payments' element={<Payments />} />
-				<Route path='payments/:id' element={<PaymentDetails />} />
-				<Route path='analytics' element={<Analytics />} />
+				<Route
+					path='live-chat'
+					element={
+						<Auth>
+							<LiveChat />
+						</Auth>
+					}
+				/>
+				<Route
+					path='payments'
+					element={
+						<Auth>
+							<Payments />
+						</Auth>
+					}
+				/>
+				<Route
+					path='payments/:id'
+					element={
+						<Auth>
+							<PaymentDetails />
+						</Auth>
+					}
+				/>
+				<Route
+					path='analytics'
+					element={
+						<Auth>
+							<Analytics />
+						</Auth>
+					}
+				/>
 
-				<Route path='recycle' element={<RecycleLayout />}>
-					<Route path='users' element={<RecycleUsers />} />
-					<Route path='products' element={<RecycleProducts />} />
+				<Route
+					path='recycle'
+					element={
+						<Auth>
+							<RecycleLayout />
+						</Auth>
+					}
+				>
+					<Route
+						path='users'
+						element={
+							<Auth>
+								<RecycleUsers />
+							</Auth>
+						}
+					/>
+					<Route
+						path='products'
+						element={
+							<Auth>
+								<RecycleProducts />
+							</Auth>
+						}
+					/>
 				</Route>
 			</Route>
+
 			<Route path='auth' element={<AuthenticationLayout />}>
 				<Route index element={<Login />} />
 				<Route path='otp_verification' element={<Otp_Verification />} />
