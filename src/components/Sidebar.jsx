@@ -19,8 +19,9 @@ const Sidebar = () => {
 	const { setUserData } = useContext(AuthContext);
 	function handleLogout() {
 		setUserData(null);
-		navigate('/auth');
 		sessionStorage.removeItem('token');
+		sessionStorage.removeItem('data');
+		navigate('/auth');
 	}
 
 	return (

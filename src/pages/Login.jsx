@@ -1,8 +1,7 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner';
 
-import AuthContext from '../context/AuthContext';
 import { loginUser } from '../lib/apiEndPoints';
 
 import LabelInput from '../components/LabelInput';
@@ -13,8 +12,6 @@ const Login = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 	const navigate = useNavigate();
-
-	const { setUserData } = useContext(AuthContext);
 
 	const handleChange = (e) => {
 		updateFormData({
@@ -32,7 +29,8 @@ const Login = () => {
 		const res = await loginUser({ email, password });
 		if (res.requestSuccessful) {
 			sessionStorage.setItem('token', res.accessToken);
-			setUserData({ ...res.UserInfo });
+			const data = JSON.stringify(res.UserInfo);
+			sessionStorage.setItem('data', data);
 
 			navigate('/', { replace: true });
 			setLoading(false);
@@ -98,7 +96,7 @@ const Login = () => {
 								strokeWidthSecondary={2}
 							/>
 						)}
-						Sign Up
+						Sign In
 					</button>
 				</form>
 			</div>

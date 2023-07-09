@@ -5,9 +5,12 @@ import UsersTagHolders from '../components/UsersTagHolders';
 import BackButtonNavigation from '../components/BackButtonNavigation';
 import Active_InactiveUsers from '../components/Active_InactiveUsers';
 import { buyersTags } from '../lib/utils';
+import { useContext } from 'react';
+import OtherContext from '../context/OtherContext';
 
 const BuyersLayout = () => {
 	const { id } = useParams();
+	const { usersNumbers } = useContext(OtherContext);
 
 	return (
 		<div>
@@ -19,7 +22,7 @@ const BuyersLayout = () => {
 			{!id && (
 				<header className='flex justify-start items-center gap-5 mt-3 md:mt-0'>
 					<SquareBox
-						number={6000}
+						number={usersNumbers.buyers}
 						tag='Buyers'
 						classnames='border border-primary-700'
 					/>

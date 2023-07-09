@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Oval } from 'react-loader-spinner';
 import CancelIcon from './icons/cancelIcon.svg?component';
 import ModalSuccess from './ModalSuccess';
+import moment from 'moment/moment';
 
 const ModalSuspendUser = ({
 	setIsOpenSuspension,
@@ -13,8 +16,30 @@ const ModalSuspendUser = ({
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [selected, setSelected] = useState('');
 	const [reason, setReason] = useState('');
+	const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
+	const currentDate = moment(); // Get the current date
+
+	const addOneWeek = () => {
+		const futureDate = currentDate.add(1, 'week'); // Add one week
+
+		return futureDate.valueOf(); // Return the timestamp
+	};
+
+	const addOneMonth = () => {
+		const futureDate = currentDate.add(1, 'month'); // Add one month
+
+		return futureDate.valueOf(); // Return the timestamp
+	};
+
+	const addSixMonths = () => {
+		const futureDate = currentDate.add(6, 'months'); // Add six months
+
+		return futureDate.valueOf(); // Return the timestamp
+	};
 
 	async function suspendUser() {
+		setLoading(true);
 		const res = await action({
 			flagId,
 			productId,
@@ -23,9 +48,11 @@ const ModalSuspendUser = ({
 			suspensionExpiresAt: selected,
 		});
 		if (res.requestSucessful) {
+			setLoading(false);
 			setSelected('');
 			setReason('');
 			setShowSuccess(true);
+			navigate('/reports');
 		}
 	}
 	return (
@@ -50,19 +77,19 @@ const ModalSuspendUser = ({
 						>
 							<option defaultValue='select'>Select</option>
 							<option
-								value={10080}
+								value={addOneWeek()}
 								className='bg-red-300 text-black'
 							>
 								One Week
 							</option>
 							<option
-								value={259200}
+								value={addOneMonth()}
 								className='bg-red-300 text-black'
 							>
 								One Month
 							</option>
 							<option
-								value={263577}
+								value={addSixMonths()}
 								className='bg-red-300 text-black'
 							>
 								Six Month
@@ -90,9 +117,23 @@ const ModalSuspendUser = ({
 						</button>
 						<button
 							onClick={suspendUser}
-							className='bg-red-text text-white rounded-md px-10 py-2'
+							className='bg-red-text text-white rounded-md px-10 py-2 flex items-center justify-center gap-3'
 						>
-							Yes
+							{loading && (
+								<Oval
+									height={20}
+									width={20}
+									color='#F9F8F8'
+									wrapperStyle={{}}
+									wrapperClass=''
+									visible={true}
+									ariaLabel='oval-loading'
+									secondaryColor='#B3B3B3'
+									strokeWidth={2}
+									strokeWidthSecondary={2}
+								/>
+							)}{' '}
+							<span>Yes</span>
 						</button>
 					</div>
 				</article>
@@ -100,7 +141,7 @@ const ModalSuspendUser = ({
 				<ModalSuccess
 					action={setShowSuccess}
 					closeSecond={setIsOpenSuspension}
-					label={'User has been added to Recycle>Suspension List'}
+					label={'User has been added to Recycle >  Suspension List'}
 				/>
 			)}
 		</>

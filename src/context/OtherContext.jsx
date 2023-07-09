@@ -5,11 +5,21 @@ const OtherContext = createContext();
 
 export const OtherProvider = ({ children }) => {
 	const [userReportUser, setUserReportUser] = useState();
+	const [chartData, setChartData] = useState([]);
+	const [usersNumbers, setUsersNumbers] = useState({
+		drivers: '',
+		buyers: '',
+		suppliers: '',
+	});
 
 	return (
 		<OtherContext.Provider
 			value={{
 				userReportUser,
+				usersNumbers,
+				chartData,
+				setChartData,
+				setUsersNumbers,
 				setUserReportUser,
 			}}
 		>
