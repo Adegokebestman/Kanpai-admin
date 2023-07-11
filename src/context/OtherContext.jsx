@@ -5,6 +5,7 @@ const OtherContext = createContext();
 
 export const OtherProvider = ({ children }) => {
 	const [userReportUser, setUserReportUser] = useState();
+	const [userData, setUserData] = useState(null);
 	const [chartData, setChartData] = useState([]);
 	const [usersNumbers, setUsersNumbers] = useState({
 		drivers: '',
@@ -18,6 +19,8 @@ export const OtherProvider = ({ children }) => {
 				userReportUser,
 				usersNumbers,
 				chartData,
+				userData,
+				setUserData,
 				setChartData,
 				setUsersNumbers,
 				setUserReportUser,

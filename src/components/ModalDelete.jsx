@@ -8,9 +8,10 @@ const ModalDelete = ({ setOpenDelete, value, recycle, action }) => {
 	// click delete sends a request to delete the data
 	const [deleted, setDeleted] = useState(false);
 
-	const deleteProduct = () => {
+	const deleteProduct = async () => {
+		console.log('done');
 		if (action) {
-			const data = action();
+			const data = await action();
 			if (data.requestSucessful) {
 				setDeleted(true);
 			}

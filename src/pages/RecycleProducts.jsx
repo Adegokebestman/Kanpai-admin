@@ -4,14 +4,14 @@ import { getSuspendedProducts } from '../lib/apiEndPoints';
 import { Oval } from 'react-loader-spinner';
 
 const RecycleProducts = () => {
-	const [suspendedUsers, setSuspendedUsers] = useState([]);
+	const [suspendedProducts, setSuspendedProducts] = useState([]);
 	const [loading, setLoading] = useState([]);
 	useEffect(() => {
 		async function fetch() {
 			setLoading(true);
-			const { requestSucessful, suspendedUsers } =
+			const { requestSucessful, suspendedProducts } =
 				await getSuspendedProducts();
-			setSuspendedUsers(suspendedUsers);
+			setSuspendedProducts(suspendedProducts);
 			if (requestSucessful) {
 				setLoading(false);
 			}
@@ -34,10 +34,10 @@ const RecycleProducts = () => {
 					strokeWidthSecondary={2}
 				/>
 			)}
-			{suspendedUsers &&
-				suspendedUsers.map((suspendedUser, i) => (
+			{suspendedProducts &&
+				suspendedProducts.map((suspendedUser, i) => (
 					<SingleRecycleItem
-						key={i - suspendedUser}
+						key={i}
 						value={suspendedUser}
 						user={false}
 					/>

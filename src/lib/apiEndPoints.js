@@ -47,6 +47,12 @@ export async function loginUser(email__password) {
 const SUPPLIERS_NUM = 'admin/users/getSuppliersNumber';
 const DRIVERS_NUM = 'admin/users/getDriversNumber';
 const BUYERS_NUM = 'admin/users/getBuyersNumber';
+const ACTIVE_BUYERS = 'admin/users/getActiveBuyers';
+const ACTIVE_SELLERS = 'admin/users/getActiveSuppliers';
+const ACTIVE_DRIVERS = 'admin/users/getActiveDrivers';
+const INACTIVE_BUYERS = 'admin/users/getInactiveBuyers';
+const INACTIVE_SELLERS = 'admin/users/getInactiveSuppliers';
+const INACTIVE_DRIVERS = 'admin/users/getInactiveDrivers';
 
 export async function getSuppliersNum() {
 	//used
@@ -59,6 +65,30 @@ export async function getDriversNum() {
 export async function getBuyersNum() {
 	//used
 	return await reports('', BUYERS_NUM);
+}
+export async function getActiveBuyers() {
+	//used
+	return await reports('', ACTIVE_BUYERS);
+}
+export async function getActiveSuppliers() {
+	//used
+	return await reports('', ACTIVE_SELLERS);
+}
+export async function getActiveDrivers() {
+	//used
+	return await reports('', ACTIVE_DRIVERS);
+}
+export async function getInactiveBuyers() {
+	//used
+	return await reports('', INACTIVE_BUYERS);
+}
+export async function getInactiveSuppliers() {
+	//used
+	return await reports('', INACTIVE_SELLERS);
+}
+export async function getInactiveDrivers() {
+	//used
+	return await reports('', INACTIVE_DRIVERS);
 }
 
 // Flags
@@ -123,7 +153,7 @@ export async function suspendAProduct(data) {
 	return await reports('post', SUSPEND_PRODUCT, data);
 }
 export async function unSuspendAProduct(productId) {
-	return await reports('post', UNSUSPEND_PRODUCTS, productId);
+	return await reports('post', UNSUSPEND_PRODUCTS, { productId });
 }
 
 const SUSPENDED_USERS = 'admin/users/getSuspendedUsers';
@@ -138,8 +168,8 @@ export async function suspendAUser(data) {
 	//used
 	return await reports('post', SUSPEND_USER, data);
 }
-export async function unSuspendAUser(productId) {
-	return await reports('post', UNSUSPEND_USERS, productId);
+export async function unSuspendAUser(userId) {
+	return await reports('post', UNSUSPEND_USERS, { userId });
 }
 
 // UserAndProduct Details
@@ -166,4 +196,36 @@ export async function getUserActivities(userId) {
 export async function getAllProductOrders(productId) {
 	//used
 	return await reports('post', PRODUCT_ACTIVITY, { productId });
+}
+
+// USERS
+
+const ALL_USERS = 'users/getAllBuyers';
+const ALL_SELLERS = 'users/getAllSuppliers';
+const ALL_DRIVERS = 'users/getAllDrivers';
+
+export async function getAllUsers() {
+	//used
+	return await reports('', ALL_USERS);
+}
+export async function getAllSellers() {
+	//used
+	return await reports('', ALL_SELLERS);
+}
+export async function getAllDrivers() {
+	//used
+	return await reports('', ALL_DRIVERS);
+}
+
+// PAYMENT INFO
+const PAYMENT_INFO = 'payment/getPaymentInfo';
+const SHIPPING_INFO = 'shipping/getUserShippingInfo';
+
+export async function getPaymentInfo(id) {
+	//used
+	return await reports('', PAYMENT_INFO, null, id);
+}
+export async function getUserShippingInfo(id) {
+	//used
+	return await reports('', SHIPPING_INFO, null, id);
 }

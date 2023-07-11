@@ -6,19 +6,21 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 	const [userData, setUserData] = useState();
+	const [localData, setLocalData] = useState();
 
-	const data = sessionStorage.getItem('data');
 	useEffect(() => {
-		if (data) {
-			setUserData(JSON.parse(data));
+		if (localData) {
+			setUserData(JSON.parse(localData));
 		}
-	}, [data]);
+	}, [localData]);
 
 	return (
 		<AuthContext.Provider
 			value={{
 				userData,
 				setUserData,
+				localData,
+				setLocalData,
 			}}
 		>
 			{children}

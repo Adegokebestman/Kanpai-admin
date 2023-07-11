@@ -1,45 +1,10 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { Link } from 'react-router-dom';
-import { BiPencil } from 'react-icons/bi';
-import { BsCamera } from 'react-icons/bs';
+import OtherContext from '../context/OtherContext';
 
 const BuyerProfile = () => {
-	const [userData, setUserData] = useState({
-		name: '',
-		phone: '',
-		description: '',
-		image: '',
-	});
-
-	const [barInfo, setBarInfo] = useState('');
-	const [productImagePreview, setProductImagePreview] = useState('');
-
-	const [isEditing, setIsEditing] = useState(false);
-	const [isEditDone, setIsEditDone] = useState(false);
-
-	const handleInputChange = (event) => {
-		const { name, value } = event.target;
-		setUserData({ ...userData, [name]: value });
-	};
-
-	const handleImageUpload = (event) => {
-		const file = event.target.files[0];
-		setUserData({ ...userData, image: file });
-		setProductImagePreview(URL.createObjectURL(file));
-	};
-
-	const handleEditClick = () => {
-		setIsEditing(true);
-	};
-
-	const handleSaveClick = () => {
-		// Save the edited profile data
-		setIsEditing(false);
-		setIsEditDone(true);
-		// Perform the necessary API call or data update
-		// ...
-	};
+	const { userData } = useContext(OtherContext);
 
 	return (
 		<div>
@@ -59,13 +24,53 @@ const BuyerProfile = () => {
 			<div className='mt-10 grid grid-rows-2 grid-flow-col justify-center items-center'>
 				<div>
 					<img
-						src={productImagePreview || barInfo.photo}
+						src={userData.photo}
+						alt={userData.name}
+						className='w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square'
+					/>
+				</div>
+
+				<div>
+					<p className='font-semibold text-2xl inline-block ml-2'>
+						{userData.name}
+					</p>
+					<div>
+						<p className='font-medium text-lg inline-block ml-2'>
+							{userData.phone}
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div className='w-full mx-auto'>
+				<h2 className='text-xl font-semibold sm:text-2xl'>
+					Bar description
+				</h2>
+
+				<div className='mt-4 bg-white rounded-md border-2 border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white first-letter:uppercase border-y-primary-700'>
+					{userData.description}
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default BuyerProfile;
+{
+	/* 
+	import { BiPencil } from 'react-icons/bi';
+import { BsCamera } from 'react-icons/bs';
+
+	<div className='mt-10 grid grid-rows-2 grid-flow-col justify-center items-center'>
+				<div>
+					<img
+						src={userData.photo}
 						alt=''
 						className='w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square'
 					/>
 
-					<div className='border bg-white w-10 h-10 p-2 ml-40 camera -mt-10 text-black rounded-full'>
-						<label htmlFor='image'>
+					{/* <div className='border bg-white w-10 h-10 p-2 ml-40 camera -mt-10 text-black rounded-full'>
+						<label htmlFor='photo'>
 							<BsCamera
 								onClick={handleEditClick}
 								className='text-2xl cursor-pointer'
@@ -75,16 +80,16 @@ const BuyerProfile = () => {
 							<input
 								style={{ display: 'none' }}
 								type='file'
-								id='image'
-								accept='image/*'
+								id='photo'
+								accept='photo/*'
 								onChange={handleImageUpload}
 							/>
 						)}
-					</div>
+					</div> 
 				</div>
 
 				<div>
-					{isEditing ? (
+					{/* {isEditing ? (
 						<input
 							className='border border-primary-700 sidebar rounded-lg p-2 mb-2'
 							type='text'
@@ -93,20 +98,20 @@ const BuyerProfile = () => {
 							value={userData.name}
 							onChange={handleInputChange}
 						/>
-					) : (
-						<p className='font-semibold text-2xl inline-block ml-2'>
-							{barInfo.name}
-							<button
-								onClick={handleEditClick}
+					) : ( 
+					<p className='font-semibold text-2xl inline-block ml-2'>
+						{userData.name}
+						{/* <button
+								onClick={}
 								className='font-medium ml-4 text-black text-2xl border border-white sidebar rounded-lg p-2 mb-2'
 							>
 								<BiPencil />
-							</button>
-						</p>
-					)}
+							</button> 
+					</p>
+					{/* )} 
 
 					<div>
-						{isEditing ? (
+						{/* {isEditing ? (
 							<input
 								className='border border-primary-700 sidebar rounded-lg p-2 mb-2'
 								type='number'
@@ -115,17 +120,17 @@ const BuyerProfile = () => {
 								value={userData.phone}
 								onChange={handleInputChange}
 							/>
-						) : (
-							<p className='font-medium text-lg inline-block ml-2'>
-								{barInfo.phone}
-								<button
+						) : ( 
+						<p className='font-medium text-lg inline-block ml-2'>
+							{userData.phone}
+							{/* <button
 									onClick={handleEditClick}
 									className='font-medium ml-4 text-black text-2xl border border-white sidebar rounded-lg p-2'
 								>
 									<BiPencil />
-								</button>
-							</p>
-						)}
+								</button> 
+						</p>
+						{/* // )}
 					</div>
 				</div>
 			</div>
@@ -134,7 +139,7 @@ const BuyerProfile = () => {
 				<h2 className='text-xl font-semibold sm:text-2xl'>
 					Bar description
 				</h2>
-				{isEditing ? (
+				{/* {isEditing ? (
 					<textarea
 						className='mt-4 bg-white rounded-2xl sidebar border border-gray-400 leading-normal resize-none w-full msg py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white'
 						name='description'
@@ -142,15 +147,13 @@ const BuyerProfile = () => {
 						placeholder={barInfo.description}
 						onChange={handleInputChange}
 					/>
-				) : (
-					<textarea
-						disabled
-						value={barInfo.description}
-						className='mt-4 bg-white rounded-2xl sidebar border border-gray-400 leading-normal resize-none w-full msg py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white'
-					></textarea>
-				)}
+				) : ( 
+				<div className='mt-4 bg-white rounded-2xl sidebar border border-gray-400 leading-normal resize-none w-full msg py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white first-letter:uppercase'>
+					{userData.description}
+				</div>
+				{/* )} 
 
-				<div>
+				{/* <div>
 					{isEditing ? (
 						<button
 							onClick={handleSaveClick}
@@ -166,10 +169,6 @@ const BuyerProfile = () => {
 							Edit
 						</button>
 					)}
-				</div>
-			</div>
-		</div>
-	);
-};
-
-export default BuyerProfile;
+				</div> 
+			</div> */
+}

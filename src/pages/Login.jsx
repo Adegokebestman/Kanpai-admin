@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner';
 
@@ -6,8 +6,11 @@ import { loginUser } from '../lib/apiEndPoints';
 
 import LabelInput from '../components/LabelInput';
 import WavingHand from '../components/icons/WavingHandIcon';
+import AuthContext from '../context/AuthContext';
 
 const Login = () => {
+	const { setLocalData } = useContext(AuthContext);
+
 	const [formData, updateFormData] = useState();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
@@ -31,6 +34,7 @@ const Login = () => {
 			sessionStorage.setItem('token', res.accessToken);
 			const data = JSON.stringify(res.UserInfo);
 			sessionStorage.setItem('data', data);
+			setLocalData(sessionStorage.getItem('data'));
 
 			navigate('/', { replace: true });
 			setLoading(false);

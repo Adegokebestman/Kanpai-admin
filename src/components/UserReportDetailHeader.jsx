@@ -23,12 +23,12 @@ const UserReportDetailHeader = () => {
 						>
 							Suspend User
 						</button>
-						<button
+						{/* <button
 							className='font-bold text-sm sm:text-base border-none rounded-full px-2 py-1 sm:px-4 sm:py-2 bg-red-box text-white'
 							onClick={() => setIsOpenDelete(true)}
 						>
 							Block User
-						</button>
+						</button> */}
 					</aside>
 				)}
 			</header>
