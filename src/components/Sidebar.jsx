@@ -76,7 +76,7 @@ const Sidebar = () => {
 					title={'Recycle Bin'}
 				/>
 				<li
-					className='flex items-center gap-3 text-sm sm:text-base py-2 px-3 sm:px-6 text-[#A65959] font-bold mt-5 sm:mt-10'
+					className='flex items-center gap-3 text-sm sm:text-base py-2 px-3 sm:px-6 text-[#A65959] font-bold mt-5 sm:mt-10 cursor-pointer'
 					onClick={handleLogout}
 				>
 					<span className='text-lg sm:text-2xl text-inherit font-extrabold'>

@@ -5,7 +5,7 @@ import { Oval } from 'react-loader-spinner';
 
 const RecycleUsers = () => {
 	const [suspendedUsers, setSuspendedUsers] = useState([]);
-	const [loading, setLoading] = useState([]);
+	const [loading, setLoading] = useState(false);
 	useEffect(() => {
 		async function fetch() {
 			setLoading(true);

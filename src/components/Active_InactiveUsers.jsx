@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const Active_InactiveUsers = ({ active, number = 200 }) => {
+const Active_InactiveUsers = ({ active, number = 0 }) => {
 	return (
 		<div
 			className={`px-3 py-1 rounded flex items-center justify-start max-w-max gap-2 ${

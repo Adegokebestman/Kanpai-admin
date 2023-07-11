@@ -6,7 +6,7 @@ import { getSuspendedProducts, getSuspendedUsers } from '../lib/apiEndPoints';
 
 const RecycleLayout = () => {
 	const [displayVal, setDisplayVal] = useState(0);
-	const [tag, setTag] = useState('')
+	const [tag, setTag] = useState('');
 
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -19,16 +19,16 @@ const RecycleLayout = () => {
 
 	useEffect(() => {
 		if (location.pathname === '/recycle/products') {
-			setTag('Products Suspended')
+			setTag('Products Suspended');
 			const fetch = async () => {
 				const data = await getSuspendedProducts();
 				if (data.requestSucessful) {
-					setDisplayVal(data.suspendedUsers.length);
+					setDisplayVal(data.suspendedProducts.length);
 				}
 			};
 			fetch();
 		} else if (location.pathname === '/recycle/users') {
-			setTag('Users Suspended')
+			setTag('Users Suspended');
 			const fetch = async () => {
 				const data = await getSuspendedUsers();
 				if (data.requestSucessful) {

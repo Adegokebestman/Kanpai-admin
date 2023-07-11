@@ -1,10 +1,19 @@
 import { RiMessage2Line } from 'react-icons/ri';
 import ImageElement from './ImageElement';
 import SquareBox from './SquareBox';
+import { useContext } from 'react';
+import OtherContext from '../context/OtherContext';
+import ChatContext from '../context/ChatContext';
+import { useNavigate } from 'react-router-dom';
 
 const SupplierProfile = () => {
-	let srcImg = 'https://source.unsplash.com/400x400/?portrait';
-
+	const { userData } = useContext(OtherContext);
+	const { updateChat } = useContext(ChatContext);
+	const navigate = useNavigate();
+	function handleClick() {
+		updateChat(userData);
+		navigate('/live-chat');
+	}
 	return (
 		<div>
 			<div className='flex flex-col-reverse md:flex-row justify-between items-center mx-4'>
@@ -13,15 +22,23 @@ const SupplierProfile = () => {
 						seller
 					</span>
 					<div className=' bg-white rounded-full h-24 w-24  sm:h-32 sm:w-32 border border-gray-300 overflow-hidden sm:self-start'>
-						<ImageElement imgSrc={srcImg} imgTitle={'userName'} />
+						<ImageElement
+							imgSrc={userData.photo}
+							imgTitle={userData.name}
+						/>
 					</div>
 					<div>
-						<h1 className='font-medium text-2xl'>Loyd Francis</h1>
+						<h1 className='font-medium text-2xl'>
+							{userData.lastName + ' ' + userData.name}
+						</h1>
 						<span className='flex items-center  gap-4 leading-8'>
 							<p className='text-gray-700 text-xl'>
-								Loydfgmail.com
+								{userData.email}
 							</p>
-							<RiMessage2Line className='text-primary-700' />
+							<RiMessage2Line
+								className='text-primary-700'
+								onClick={handleClick}
+							/>
 						</span>
 						<p>Joined 6th March, 2022</p>
 					</div>

@@ -1,22 +1,44 @@
 import { Outlet, useParams } from 'react-router-dom';
 import SquareBox from '../components/SquareBox';
-import CreateNewButton from '../components/CreateNewButton';
+// import CreateNewButton from '../components/CreateNewButton';
 import UsersTagHolders from '../components/UsersTagHolders';
 import BackButtonNavigation from '../components/BackButtonNavigation';
 import Active_InactiveUsers from '../components/Active_InactiveUsers';
 import { buyersTags } from '../lib/utils';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import OtherContext from '../context/OtherContext';
+import { getActiveBuyers, getInactiveBuyers } from '../lib/apiEndPoints';
 
 const BuyersLayout = () => {
 	const { id } = useParams();
 	const { usersNumbers } = useContext(OtherContext);
+	const [data, setData] = useState({
+		activeUsers: '',
+		inactiveBuyers: '',
+	});
+
+	useEffect(() => {
+		const updateData = (allData) => {
+			const [data1, data2] = allData;
+			setData({
+				...data,
+				activeUsers: data1.activeBuyers.length,
+				inactiveBuyers: data2.suspendedUsers.length,
+			});
+		};
+		async function fetch() {
+			const data1 = await getActiveBuyers();
+			const data2 = await getInactiveBuyers();
+			updateData([data1, data2]);
+		}
+		fetch();
+	}, []);
 
 	return (
 		<div>
 			<div className='flex items-center justify-between'>
 				<BackButtonNavigation />
-				{!id && <CreateNewButton role='Users' />}
+				{/* {!id && <CreateNewButton role='Users' />} */}
 				{id && <UsersTagHolders tags={buyersTags} />}
 			</div>
 			{!id && (
@@ -26,13 +48,19 @@ const BuyersLayout = () => {
 						tag='Buyers'
 						classnames='border border-primary-700'
 					/>
-					<div className='flex flex-col gap-2'>
-						<Active_InactiveUsers
-							key={Math.random()}
-							active={true}
-						/>
-						<Active_InactiveUsers key={Math.random()} />
-					</div>
+					{data && (
+						<div className='flex flex-col gap-2'>
+							<Active_InactiveUsers
+								key={Math.random()}
+								active={true}
+								number={data.activeUsers}
+							/>
+							<Active_InactiveUsers
+								key={Math.random()}
+								number={data.inactiveBuyers}
+							/>
+						</div>
+					)}
 				</header>
 			)}
 

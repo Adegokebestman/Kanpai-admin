@@ -5,6 +5,7 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import AuthContext from '../context/AuthContext';
 const Header = ({ setShowSidebar }) => {
 	const { userData } = useContext(AuthContext);
+
 	return (
 		<header className='h-[100px] py-6'>
 			<div className='flex items-center justify-between px-5 sm:px-10 lg:px-14'>

@@ -5,7 +5,9 @@ import SuccessfulIcon from './icons/successful.svg?component';
 const ModalSuccess = ({ action, closeSecond, label }) => {
 	function closeAll() {
 		action(false);
-		closeSecond(false);
+		if (closeSecond) {
+			closeSecond(false);
+		}
 	}
 	return (
 		<div className='flex items-center gap-7 justify-center flex-col'>
