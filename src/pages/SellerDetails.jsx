@@ -1,7 +1,12 @@
-import SupplierProductsView from "../components/SupplierProductsView";
+// import SupplierProductsView from "../components/SupplierProductsView";
+import SellerDetailProfile from "../components/SellerDetailProfile";
+import PaymentMethod from "../components/PaymentMethod";
+import ShipAddress from "../components/ShippingAddress";
 const SellerDetails = () => {
 	return <div>
-		<SupplierProductsView />
+		<SellerDetailProfile />
+		<PaymentMethod />
+		<ShipAddress />
 	</div>;
 };
 export default SellerDetails;
