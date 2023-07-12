@@ -49,7 +49,9 @@ const SellersLayout = () => {
 						</div>
 					)}
 
-					{id && <GeneralUsersBox />}
+					{id && (
+						<GeneralUsersBox userId={id} className={'text-white'} />
+					)}
 				</div>
 				<div className='sm:hidden mx-auto'>
 					{id && <UsersTagHolders tags={sellersTags} />}

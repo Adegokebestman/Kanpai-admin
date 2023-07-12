@@ -55,7 +55,7 @@ const Login = () => {
 				<p className='font-poppins text-sm leading-relaxed'>
 					Please login to gain access to your account
 				</p>
-				<form onSubmit={handleSubmit} className='pt-16'>
+				<form id='loginForm' onSubmit={handleSubmit} className='pt-16'>
 					{error && (
 						<p className='text-red-text font-bold first-letter:capitalize'>
 							{error}

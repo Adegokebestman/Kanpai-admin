@@ -3,13 +3,6 @@ import { getUserShippingInfo } from '../lib/apiEndPoints';
 import { useParams } from 'react-router-dom';
 
 function ThirdForm() {
-	// const [street, setStreet] = useState('');
-	// const [streetNumber, setStreetNumber] = useState('');
-	// const [country, setCountry] = useState('');
-	// const [city, setCity] = useState('');
-	// const [postalCode, setPostalCode] = useState('');
-	// const [region, setRegion] = useState('');
-	// const [phone, setPhone] = useState('');
 	const [shippingAddress, setShippingAddress] = useState(null);
 	const { id } = useParams();
 

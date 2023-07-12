@@ -9,12 +9,14 @@ import ModalEditUser from './ModalEditUser';
 import GeneralModal from './GeneralModal';
 import ModalDelete from './ModalDelete';
 import OtherContext from '../context/OtherContext';
+import moment from 'moment/moment';
 
 const UsersList = ({ data }) => {
 	const [openOptions, setOpenOptions] = useState(false);
 	const [isEdit, setIsEdit] = useState(false);
 	const { setUserData } = useContext(OtherContext);
 	const navigate = useNavigate();
+	const formattedDate = moment(data.createdAt).format('DD/MM/YYYY');
 
 	function handleClick() {
 		setUserData({ ...data });
@@ -47,7 +49,7 @@ const UsersList = ({ data }) => {
 
 				<div className='block items-center w-full'>
 					<h1 className='font-medium text-sm md:text-base whitespace-nowrap'>
-						12/01/2022
+						{formattedDate}
 					</h1>
 					<span>
 						<p className='text-gray-400 text-sm hidden md:block'>
@@ -58,7 +60,7 @@ const UsersList = ({ data }) => {
 
 				<div className='block items-center  w-full'>
 					<h1 className='font-medium text-sm md:text-base'>
-						{data.phone}
+						{data.phone || 'Unavailable'}
 					</h1>
 					<p className='text-gray-400 text-xs md:text-sm'>Number</p>
 				</div>

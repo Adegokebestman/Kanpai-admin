@@ -1,34 +1,56 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 import InputFilter from '../components/InputFilter';
 import TableComponent from '../components/TableComponent';
-import { NavLink } from 'react-router-dom';
+import { getPaymentRequests, getUserDetails } from '../lib/apiEndPoints';
+import moment from 'moment';
+import GeneralModal from '../components/GeneralModal';
+import ModalPayments from '../components/ModalPayments';
 
 // import Button from '../components/Button';
 const Payments = () => {
+	const [loading, setLoading] = useState(false);
+	const [requests, setRequests] = useState([]);
+	const [openApprove, setOpenApprove] = useState(false);
+	const [openDecline, setOpenDecline] = useState(false);
+	const [id, setId] = useState('');
+
+	async function handleDeclinePayment(payemntId) {
+		setOpenDecline(true);
+		setId(payemntId);
+	}
+	async function handleApprovePayment(payemntId) {
+		setOpenApprove(true);
+		setId(payemntId);
+	}
+
 	const columns = [
 		{
-			name: '',
+			name: 'Username',
 			selector: (row) => row.userName,
 		},
 		{
-			name: '',
+			name: 'Email',
 			selector: (row) => row.email,
 		},
 		{
-			name: '',
-			selector: (row) => row.amount,
+			name: 'Amount',
+			selector: (row) => <p>$ {row.amount}</p>,
 
 			// sortable: true,
 		},
 
 		{
-			name: '',
+			name: 'Date',
 			selector: (row) => row.date,
 		},
 		{
 			name: '',
 			selector: (row) => (
-				<button className='border-green-bg border text-green-bg px-3 py-2 rounded-full'>
+				<button
+					className='border-green-bg border text-green-bg px-3 py-2 rounded-full'
+					onClick={() => handleApprovePayment(row.id)}
+				>
 					{row.approve}
 				</button>
 			),
@@ -36,50 +58,80 @@ const Payments = () => {
 		{
 			name: '',
 			selector: (row) => (
-				<NavLink to={`${row.id.toString()}`}>
-					<button className='border-red-text border text-red-200 px-3 py-2 rounded-full'>
-						{row.decline}
-					</button>
-				</NavLink>
+				<button
+					className='border-red-text border text-red-200 px-3 py-2 rounded-full'
+					onClick={() => handleDeclinePayment(row.id)}
+				>
+					{row.decline}
+				</button>
 			),
 		},
 	];
 
-	const dataArray = [];
+	useEffect(() => {
+		async function fetch() {
+			setLoading(true);
+			const { requestSucessful, paymentRequests } =
+				await getPaymentRequests();
+			if (requestSucessful) {
+				const tempArray = []; // Temporary array to accumulate the data objects
 
-	for (let i = 0; i < 30; i++) {
-		const userName = `Loyd${i + 1}Francis`;
-		const email = `user${i + 1}@example.com`;
-		const amount = `$1000${i + 1}`;
-		const date = new Date().toLocaleDateString('en-US');
-		const id = i + 1;
+				for (const element of paymentRequests) {
+					// const {product} = await getProductDetails(element._id);
+					const { userInfo } = await getUserDetails(element.user);
 
-		const object = {
-			id: id,
-			userName: userName,
-			amount: amount,
-			email: email,
-			date,
-			approve: 'Approve',
-			decline: 'Decline',
-		};
+					const object = {
+						id: element._id,
+						userName:
+							userInfo && userInfo.lastName + ' ' + userInfo.name,
+						amount: element.amount,
+						email: userInfo && userInfo.email,
+						date: moment(element.createdAt).format('DD/MM/YYYY'),
+						approve: 'Approve',
+						decline: 'Decline',
+					};
 
-		dataArray.push(object);
-	}
+					tempArray.push(object);
+				}
+
+				setRequests(tempArray);
+				setLoading(false);
+			}
+		}
+		fetch();
+	}, []);
 
 	return (
-		<div className='border-[1px] rounded-xl border-gray-900 mx-auto md:w-[95%] py-10'>
-			<div className='flex justify-center'>
-				<InputFilter action={'Pay Out Requests'} filter={false} />
+		<>
+			<div className='border-[1px] rounded-xl border-gray-900 mx-auto md:w-[95%] py-10'>
+				<div className='flex justify-center'>
+					<InputFilter action={'Pay Out Requests'} filter={false} />
+				</div>
+				{loading ? (
+					<p className='animate-pulse'>Loading...</p>
+				) : (
+					<TableComponent
+						columns={columns}
+						data={requests}
+						fixedHeader
+						selectableRows={false}
+						customStyles={customStyles}
+					/>
+				)}
 			</div>
-			<TableComponent
-				columns={columns}
-				data={dataArray}
-				fixedHeader
-				selectableRows={false}
-				customStyles={customStyles}
-			/>
-		</div>
+
+			<GeneralModal isOpen={openDecline} setIsOpen={setOpenDecline}>
+				<ModalPayments setOpenDelete={setOpenDecline} id={id} />
+			</GeneralModal>
+
+			<GeneralModal isOpen={openApprove} setIsOpen={setOpenApprove}>
+				<ModalPayments
+					setOpenDelete={setOpenApprove}
+					accept={true}
+					id={id}
+				/>
+			</GeneralModal>
+		</>
 	);
 };
 export default Payments;
@@ -97,16 +149,7 @@ const customStyles = {
 	},
 	headCells: {
 		style: {
-			paddingLeft: '8px', // override the cell padding for head cells
-			paddingRight: '8px',
 			textTransform: 'uppercase',
-		},
-	},
-	cells: {
-		style: {
-			paddingLeft: '8px', // override the cell padding for data cells
-			paddingRight: '8px',
-			margin: '0 auto',
 		},
 	},
 };

@@ -11,7 +11,11 @@ const Sellers = () => {
 			setLoading(true);
 			const data = await getAllSellers();
 			if (data.requestSucessful) {
-				setAllUsers(data.allSuppliers);
+				const sortedData = data.allSuppliers.sort(
+					(b, a) => new Date(a.createdAt) - new Date(b.createdAt)
+				);
+
+				setAllUsers(sortedData);
 				setLoading(false);
 			}
 		}

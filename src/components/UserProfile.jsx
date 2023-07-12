@@ -15,30 +15,35 @@ const UserProfile = () => {
 		navigate('/live-chat');
 	}
 	return (
-		<div className='md:flex md:flex-col-3 justify-between items-center mx-auto mt-3'>
-			<article className='flex flex-col sm:flex-row items-center gap-4'>
-				<div className='bg-white rounded-full h-20 w-20 sm:h-32 sm:w-32 border border-gray-300 overflow-hidden sm:self-start'>
+		<div className='flex flex-col-reverse md:flex-row justify-between items-center mx-auto mt-3'>
+			<div className='flex items-center gap-4'>
+				<span className='hidden sm:block top-1/2 -right-[5%] translate-x-[20%] -translate-y-1/2 rounded-full bg-[#F0CFB6] text-[#A8591F] text-xs sm:text-sm relative py-1 px-2'>
+					seller
+				</span>
+				<div className=' bg-white rounded-full h-16 w-16  sm:h-32 sm:w-32 border border-gray-300 overflow-hidden sm:self-start'>
 					<ImageElement
 						imgSrc={userData.photo}
 						imgTitle={userData.name}
 					/>
 				</div>
 				<div>
-					<h1 className='font-medium text-lg md:text-2xl'>
-						{userData.name}
+					<h1 className='font-medium text-base md:text-2xl capitalize'>
+						{userData.lastName + ' ' + userData.name}
 					</h1>
-					<span className='flex items-center  gap-4 leading-8'>
-						<p className='text-gray-700 text-base md:text-xl'>
+					<aside className='flex items-center  gap-4'>
+						<p className='text-gray-700 text-sm md:text-xl'>
 							{userData.email}
 						</p>
-						<RiMessage2Line
-							className='text-primary-700'
+						<div
+							className='p-2 rounded-full bg-blue'
 							onClick={handleClick}
-						/>
-					</span>
-					<p className='text-xs md:text-sm'>Joined 6th March, 2022</p>
+						>
+							<RiMessage2Line className='text-primary-700 text-xl' />
+						</div>
+					</aside>
+					<p className='text-sm md:text-xl'>Joined 6th March, 2022</p>
 				</div>
-			</article>
+			</div>
 		</div>
 	);
 };

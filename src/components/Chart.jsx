@@ -99,7 +99,10 @@ const LineChart = () => {
 					<p className='text-xl font-medium'>Analytics</p>
 
 					<div className='relative bg-gray-600 p-2 '>
-						<select onChange={(e) => setPeriod(e.target.value)}>
+						<select
+							id='duration'
+							onChange={(e) => setPeriod(e.target.value)}
+						>
 							<option defaultValue='day' value={'day'}>
 								Weekly
 							</option>

@@ -12,7 +12,10 @@ const Buyers = () => {
 			setLoading(true);
 			const data = await getAllUsers();
 			if (data.requestSucessful) {
-				setAllUsers(data.allBuyers);
+				const sortedData = data.allBuyers.sort(
+					(b, a) => new Date(a.createdAt) - new Date(b.createdAt)
+				);
+				setAllUsers(sortedData);
 				setLoading(false);
 			}
 		}

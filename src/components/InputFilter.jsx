@@ -21,6 +21,7 @@ const InputFilter = ({ action, filter = true, label = true }) => {
 					{action}
 				</h3>
 				<form
+					id='searchForm'
 					className='border border-primary-700 rounded-lg overflow-hidden p-1 flex items-center gap-1 sm;flex-1'
 					onSubmit={handleSubmit}
 				>

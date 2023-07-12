@@ -17,6 +17,7 @@ const ModalEditProduct = ({ setOpenDelete }) => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
+		console.log(formValues);
 	}
 
 	return (
@@ -39,34 +40,3 @@ const ModalEditProduct = ({ setOpenDelete }) => {
 	);
 };
 export default ModalEditProduct;
-
-// const [searchParams] = useSearchParams();
-// const searchId = searchParams.get('id');
-// const navigate = useNavigate();
-
-// useEffect(() => {
-// 	const token = localStorage.getItem('accessToken');
-// 	const fetch = async () => {
-// 		const data = await getOnboardingProduct(token, searchId);
-// 		if (data.requestSucessful) {
-// 			const { product } = data;
-// 			setProductName(product.productName);
-// 			setDescription(product.description);
-// 			setProductImagePreview(product.photo);
-// 		}
-// 	};
-
-// 	let mounted = true;
-// 	if (mounted && searchId) {
-// 		fetch();
-// 	}
-// 	return () => {
-// 		mounted = false;
-// 	};
-// }, [searchId]);
-
-// 	const handleImageChange = (event) => {
-// 	const file = event.target.files[0];
-// 	// setImage(file);
-// 	setProductImagePreview(URL.createObjectURL(file));
-// };

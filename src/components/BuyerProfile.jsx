@@ -48,7 +48,13 @@ const BuyerProfile = () => {
 				</h2>
 
 				<div className='mt-4 bg-white rounded-md border-2 border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white first-letter:uppercase border-y-primary-700'>
-					{userData.description}
+					{userData.description === '' ? (
+						<p className='capitalize text-red-text'>
+							No Description for this User
+						</p>
+					) : (
+						userData.description
+					)}
 				</div>
 			</div>
 		</div>
