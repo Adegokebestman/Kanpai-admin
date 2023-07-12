@@ -232,3 +232,26 @@ export async function getSupplierInventory(supplierId) {
 	//used
 	return await reports('post', INVENTORY, { supplierId });
 }
+
+//	Payments
+const PAYMENT_REQUESTS = 'admin/payments/getPaymentRequests';
+const ACCEPTED_ORDERS = 'admin/payments/getAcceptedOrders';
+const APPROVER_PAYMENT = 'admin/payments/approvePayment';
+const DECLINE_PAYMENT = 'admin/payments/declinePayment';
+
+export async function getPaymentRequests() {
+	//used
+	return await reports('', PAYMENT_REQUESTS);
+}
+export async function getAcceptedOrders() {
+	//used
+	return await reports('', ACCEPTED_ORDERS);
+}
+export async function approvePayment(id) {
+	//used
+	return await reports('post', APPROVER_PAYMENT, { id });
+}
+export async function declinePayment(id) {
+	//used
+	return await reports('post', DECLINE_PAYMENT, { id });
+}
