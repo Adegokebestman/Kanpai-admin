@@ -12,7 +12,10 @@ const TruckDriver = () => {
 			setLoading(true);
 			const data = await getAllDrivers();
 			if (data.requestSucessful) {
-				setAllUsers(data.allDrivers);
+				const sortedData = data.allDrivers.sort(
+					(b, a) => new Date(a.createdAt) - new Date(b.createdAt)
+				);
+				setAllUsers(sortedData);
 				setLoading(false);
 			}
 		}

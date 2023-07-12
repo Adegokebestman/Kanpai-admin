@@ -1,5 +1,9 @@
 // import { useState } from 'react';
 
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getPaymentInfo } from '../lib/apiEndPoints';
+
 function PaymentMethod() {
 	// const [name, setName] = useState('');
 	// const [lastName, setLastName] = useState('');
@@ -8,6 +12,20 @@ function PaymentMethod() {
 	// const [cardNumber, setCardNumber] = useState('');
 	// const [expiryDate, setExpiryDate] = useState('');
 	// const [cvv, setCvv] = useState('');
+	const { id } = useParams();
+
+	useEffect(() => {
+		async function fetch() {
+			const data = await getPaymentInfo(id);
+			if (data.requestSucessful) {
+				//
+			}
+		}
+
+		if (id) {
+			fetch();
+		}
+	}, [id]);
 
 	return (
 		<div>
@@ -20,19 +38,19 @@ function PaymentMethod() {
 			</div>
 			<div className='max-w-md  mt-4 mx-auto'>
 				<div className='mb-4 w-full px-4 py-2 border rounded-lg'>
-					name
+					<b>name</b>
 				</div>
 				<div className='mb-4 w-full px-4 py-2 border rounded-lg'>
-					lastname
+					<b>lastname</b>
 				</div>
 				<div className='mb-4 w-full px-4 py-2 border rounded-lg'>
-					address
+					<b>address</b>
 				</div>
 				<div className='mb-4 w-full px-4 py-2 border rounded-lg'>
-					company
+					<b>company</b>
 				</div>
 				<div className='mb-4 w-full px-4 py-2 border rounded-lg'>
-					card
+					<b>card</b>
 				</div>
 				<div className='flex mb-4 w-full px-4 py-2 border rounded-lg'>
 					<div className='mr-4'>expiry</div>

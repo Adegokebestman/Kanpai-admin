@@ -1,12 +1,11 @@
-// import SupplierProductsView from "../components/SupplierProductsView";
-import SellerDetailProfile from "../components/SellerDetailProfile";
-import PaymentMethod from "../components/PaymentMethod";
-import ShipAddress from "../components/ShippingAddress";
+import SellerDetailProfile from '../components/SellerDetailProfile';
+// import PaymentMethod from '../components/PaymentMethod';
 const SellerDetails = () => {
-	return <div>
-		<SellerDetailProfile />
-		<PaymentMethod />
-		<ShipAddress />
-	</div>;
+	return (
+		<div>
+			<SellerDetailProfile />
+			{/* <PaymentMethod /> */}
+		</div>
+	);
 };
 export default SellerDetails;

@@ -218,14 +218,17 @@ export async function getAllDrivers() {
 }
 
 // PAYMENT INFO
-const PAYMENT_INFO = 'payment/getPaymentInfo';
 const SHIPPING_INFO = 'shipping/getUserShippingInfo';
 
-export async function getPaymentInfo(id) {
-	//used
-	return await reports('', PAYMENT_INFO, null, id);
-}
 export async function getUserShippingInfo(id) {
 	//used
 	return await reports('', SHIPPING_INFO, null, id);
+}
+
+// Inventory
+const INVENTORY = 'admin/products/getSupplierInventory';
+
+export async function getSupplierInventory(supplierId) {
+	//used
+	return await reports('post', INVENTORY, { supplierId });
 }

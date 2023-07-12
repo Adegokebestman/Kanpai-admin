@@ -9,16 +9,21 @@ const LabelInput = ({
 }) => {
 	return (
 		<>
-			<label htmlFor={name}>{label}</label>
-			<input
-				autoComplete={type == 'email' ? 'username' : 'current-password'}
-				required
-				type={type ?? 'text'}
-				name={name}
-				placeholder={placeholder ?? 'enter text'}
-				className={classNames}
-				onChange={onChange}
-			/>
+			<label htmlFor={name}>
+				{label}
+				<input
+					autoComplete={
+						type == 'password' ? 'current-password' : type
+					}
+					required
+					type={type ?? 'text'}
+					id={name}
+					name={name}
+					placeholder={placeholder ?? 'enter text'}
+					className={classNames}
+					onChange={onChange}
+				/>
+			</label>
 		</>
 	);
 };

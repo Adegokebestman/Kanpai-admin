@@ -7,17 +7,20 @@ import { filterActivities } from '../lib/utils';
 import FilterComponent from '../components/FilterComponent';
 import { useParams } from 'react-router-dom';
 import { getUserActivities } from '../lib/apiEndPoints';
-import {Oval}from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 
 const SupplierActivities = () => {
 	const [showFilter, setShowFilter] = useState(false);
 	const [activities, setActivities] = useState([]);
 	const { id } = useParams();
+	const [loading, setLoading] = useState(false);
 	useEffect(() => {
+		setLoading(true);
 		async function fetch() {
 			const data = await getUserActivities(id);
 			if (data.requestSucessful) {
 				setActivities(data.activities);
+				setLoading(false);
 			}
 		}
 		fetch();
@@ -41,20 +44,22 @@ const SupplierActivities = () => {
 					)}
 				</div>
 
-				{!activities ? <Oval
-					height={30}
-					width={30}
-					color='#F9F8F8'
-					wrapperStyle={{}}
-					wrapperClass='bg-gray-fade w-full flex items-center justify-center h-full py-20'
-					visible={true}
-					ariaLabel='oval-loading'
-					secondaryColor='#B3B3B3'
-					strokeWidth={2}
-					strokeWidthSecondary={2}
-				/> : 
-				<UserActivities data={activities} />
-				}
+				{loading ? (
+					<Oval
+						height={30}
+						width={30}
+						color='#F9F8F8'
+						wrapperStyle={{}}
+						wrapperClass='bg-gray-fade w-full flex items-center justify-center h-full py-20'
+						visible={true}
+						ariaLabel='oval-loading'
+						secondaryColor='#B3B3B3'
+						strokeWidth={2}
+						strokeWidthSecondary={2}
+					/>
+				) : (
+					<UserActivities data={activities} />
+				)}
 			</div>
 		</div>
 	);
@@ -64,6 +69,9 @@ export default SupplierActivities;
 
 const UserActivities = ({ data }) => {
 	const sortedData = data.sort((b, a) => new Date(a.date) - new Date(b.date));
+	if (!sortedData.length) {
+		return <h2 className='font-bold'>No Activity for this User yet</h2>;
+	}
 	return (
 		<div className='px-2 sm:px-3 py-4 pb-8 border-l border-l-gray-200 w-[95%] mx-auto flex flex-col gap-3'>
 			{sortedData.map((act) => (
