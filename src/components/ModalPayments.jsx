@@ -8,12 +8,15 @@ import { approvePayment, declinePayment } from '../lib/apiEndPoints';
 const ModalPayments = ({ setOpenDelete, id, accept }) => {
 	// click delete sends a request to delete the data
 	const [completed, setCompleted] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const deleteProduct = async () => {
 		if (accept) {
 			const fetch = async () => {
+				setLoading(true);
 				const res = await approvePayment(id);
 				if (res.requestSucessful) {
+					setLoading(false);
 					setCompleted(true);
 				}
 			};
@@ -21,8 +24,12 @@ const ModalPayments = ({ setOpenDelete, id, accept }) => {
 			fetch();
 		} else {
 			const fetch = async () => {
+				setLoading(true);
+
 				const res = await declinePayment(id);
 				if (res.requestSucessful) {
+					setLoading(false);
+
 					setCompleted(true);
 				}
 			};
@@ -31,7 +38,15 @@ const ModalPayments = ({ setOpenDelete, id, accept }) => {
 		}
 	};
 	return (
-		<article className='space-y-8'>
+		<article className='relative space-y-8'>
+			{loading && (
+				<div
+					style={overLay}
+					className='flex items-center justify-center bg-slate-400'
+				>
+					<p className='animate-pulse'>Loading</p>
+				</div>
+			)}
 			{!completed ? (
 				<>
 					<div className='flex items-center justify-between'>
@@ -85,3 +100,13 @@ const ModalPayments = ({ setOpenDelete, id, accept }) => {
 	);
 };
 export default ModalPayments;
+
+const overLay = {
+	position: 'absolute',
+	content: '',
+	zIndex: '50',
+	top: 0,
+	right: 0,
+	height: '100%',
+	width: '100%',
+};
