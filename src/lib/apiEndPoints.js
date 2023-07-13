@@ -2,7 +2,7 @@ import axios from 'axios';
 // Token
 
 const instance = axios.create({
-	baseURL: 'https://kampai-backend.onrender.com/',
+	baseURL: 'https://kanpainode-b83dbacd8a19.herokuapp.com/',
 });
 
 instance.interceptors.request.use((config) => {

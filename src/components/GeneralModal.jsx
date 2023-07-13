@@ -7,7 +7,7 @@ const GeneralModal = ({ children, isOpen, setIsOpen, className }) => {
 		<Modal
 			isOpen={isOpen}
 			onRequestClose={() => {
-				setIsOpen(false);
+				setIsOpen ? setIsOpen(false) : null;
 			}}
 			// style={customStyles}
 			overlayClassName={

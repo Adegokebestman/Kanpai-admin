@@ -15,13 +15,13 @@ const Payments = () => {
 	const [openDecline, setOpenDecline] = useState(false);
 	const [id, setId] = useState('');
 
-	async function handleDeclinePayment(payemntId) {
+	async function handleDeclinePayment(paymentId) {
 		setOpenDecline(true);
-		setId(payemntId);
+		setId(paymentId);
 	}
-	async function handleApprovePayment(payemntId) {
+	async function handleApprovePayment(paymentId) {
 		setOpenApprove(true);
-		setId(payemntId);
+		setId(paymentId);
 	}
 
 	const columns = [
@@ -36,13 +36,12 @@ const Payments = () => {
 		{
 			name: 'Amount',
 			selector: (row) => <p>$ {row.amount}</p>,
-
-			// sortable: true,
 		},
 
 		{
 			name: 'Date',
 			selector: (row) => row.date,
+			sortable: true,
 		},
 		{
 			name: '',
@@ -120,11 +119,11 @@ const Payments = () => {
 				)}
 			</div>
 
-			<GeneralModal isOpen={openDecline} setIsOpen={setOpenDecline}>
+			<GeneralModal isOpen={openDecline}>
 				<ModalPayments setOpenDelete={setOpenDecline} id={id} />
 			</GeneralModal>
 
-			<GeneralModal isOpen={openApprove} setIsOpen={setOpenApprove}>
+			<GeneralModal isOpen={openApprove}>
 				<ModalPayments
 					setOpenDelete={setOpenApprove}
 					accept={true}
