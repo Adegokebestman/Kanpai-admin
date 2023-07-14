@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
-import EditIcon from './icons/editIcon.svg?component';
-import DeleteIcon from './icons/deleteIcon.svg?component';
+// import EditIcon from './icons/editIcon.svg?component';
+// import DeleteIcon from './icons/deleteIcon.svg?component';
 
 const ProductReportProductContainer = ({
 	productName,
@@ -36,7 +36,7 @@ const ProductReportProductContainer = ({
 					</h2>
 				</aside>
 			</div>
-
+			{/* 
 			<aside className='flex items-center gap-10 self-center'>
 				<EditIcon
 					onClick={() => openEdit(true)}
@@ -46,7 +46,7 @@ const ProductReportProductContainer = ({
 					onClick={() => openDelete(true)}
 					className='cursor-pointer'
 				/>
-			</aside>
+			</aside> */}
 		</article>
 	);
 };

@@ -1,11 +1,16 @@
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useContext, useState } from 'react';
 import { AiOutlineSend } from 'react-icons/ai';
+import ChatContext from '../context/ChatContext';
 
-const MessageAreaInput = () => {
+const MessageAreaInput = ({ action }) => {
 	const [inputText, setInputText] = useState('');
+	const { chatId } = useContext(ChatContext);
+
+	console.log(chatId);
 	function handleSubmit(e) {
 		e.preventDefault();
-		alert('submitted');
+		action(inputText);
 	}
 	return (
 		<form

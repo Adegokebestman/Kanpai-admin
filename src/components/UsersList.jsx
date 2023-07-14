@@ -26,7 +26,7 @@ const UsersList = ({ data }) => {
 	return (
 		<>
 			<div
-				className={`scrollBarContainer flex items-center mt-3 justify-between gap-3 md:gap-8 hover:text-primary-700 hover:bg-primary-100 overflow-x-auto py-2`}
+				className={`scrollBarContainer flex items-center mt-3 justify-between gap-3 md:gap-8 hover:text-primary-700 hover:bg-primary-100 overflow-x-auto py-2 w-full`}
 			>
 				<div className='flex items-center justify-center w-full gap-2 md:gap-4'>
 					<div className='w-10 h-10 sm:w-20 sm:h-20 rounded-full overflow-hidden '>
@@ -35,7 +35,7 @@ const UsersList = ({ data }) => {
 					<span>
 						<div>
 							<h1
-								className='font-medium text-base m:text-xl'
+								className='font-medium text-base m:text-xl cursor-pointer'
 								onClick={handleClick}
 							>
 								{data.lastName + ' ' + data.name}
@@ -66,10 +66,10 @@ const UsersList = ({ data }) => {
 				</div>
 
 				<div className='flex items-center gap-3'>
-					<EditIcon
+					{/* <EditIcon
 						onClick={() => setIsEdit(true)}
 						className='cursor-pointer'
-					/>
+					/> */}
 					<DeleteIcon
 						onClick={() => setOpenOptions(!openOptions)}
 						className='cursor-pointer'

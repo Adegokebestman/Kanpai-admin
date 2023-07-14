@@ -13,7 +13,8 @@ export const ChatProvider = ({ children }) => {
 	};
 	const [userToChat, setUserToChat] = useState(defaultChatState);
 	const [myChatId] = useState('myId');
-	const [messages, setMessages] = useState([1, 2, 3]);
+	const [messages, setMessages] = useState();
+	const [chatId, setChatId] = useState('');
 
 	const updateChat = (value) => {
 		setUserToChat({ ...value });
@@ -30,6 +31,8 @@ export const ChatProvider = ({ children }) => {
 				userToChat,
 				myChatId,
 				messages,
+				chatId,
+				setChatId,
 				setMessages,
 				updateChat,
 				// latestMessage,

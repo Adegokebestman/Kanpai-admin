@@ -18,8 +18,8 @@ export const AuthProvider = ({ children }) => {
 		<AuthContext.Provider
 			value={{
 				userData,
-				setUserData,
 				localData,
+				setUserData,
 				setLocalData,
 			}}
 		>

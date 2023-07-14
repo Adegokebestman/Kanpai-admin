@@ -4,12 +4,13 @@ import ChatContext from '../context/ChatContext';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 const MessageAreaHeader = () => {
-	const { userToChat, updateChat, defaultChatState, setMessages } =
+	const { userToChat, updateChat, defaultChatState, setMessages, chatId } =
 		useContext(ChatContext);
 
 	function handleClick() {
 		setMessages([]);
 		updateChat(defaultChatState);
+		chatId('');
 	}
 
 	return (
