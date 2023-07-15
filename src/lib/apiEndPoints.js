@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { io } from 'socket.io-client';
 
 const instance = axios.create({
 	baseURL: 'https://kanpainode-b83dbacd8a19.herokuapp.com/',
@@ -12,6 +13,10 @@ instance.interceptors.request.use((config) => {
 	}
 	return config;
 });
+
+export const socket = io.connect(
+	'https://kanpainode-b83dbacd8a19.herokuapp.com'
+);
 
 const reports = async (method, url, data, id) => {
 	let fullUrl = !id ? url : url + `/${id}`;

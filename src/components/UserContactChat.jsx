@@ -2,10 +2,17 @@
 import { useContext, useEffect, useState } from 'react';
 import ImageElement from './ImageElement';
 import ChatContext from '../context/ChatContext';
-import { getUserDetails } from '../lib/apiEndPoints';
+import { getUserDetails, socket } from '../lib/apiEndPoints';
 
 const UserContactChat = ({ chat }) => {
-	const { updateChat, setMessages, setChatId } = useContext(ChatContext);
+	const {
+		updateChat,
+		setMessages,
+		setChatId,
+		chatId,
+		setWaitingList,
+		waitingList,
+	} = useContext(ChatContext);
 	const [user, setUser] = useState();
 	const [lastMessage, setLastMessage] = useState();
 
@@ -16,7 +23,17 @@ const UserContactChat = ({ chat }) => {
 			setUser(data.userInfo);
 		}
 		fetch();
-	}, [chat.messages, chat.user]);
+		socket.on('receive-message', (message) => {
+			socket.on('receive-waitlist', (waitList) => {
+				setWaitingList(waitList);
+				console.log(waitList);
+			});
+			if (chatId) {
+				setMessages(message.messages);
+				console.log('added');
+			}
+		});
+	}, [chat.messages, chat.user, chatId, updateChat]);
 
 	function handleClick() {
 		// fetch messages
@@ -24,7 +41,11 @@ const UserContactChat = ({ chat }) => {
 		//? Response: setMessages(response);
 		// After the response, // Todo: updateChat with users' object
 		updateChat(user);
-		setMessages(chat.messages);
+		// if (chatId) {
+		// 	setMessages(recentMessage.filter((message) => message !== ''));
+		// } else {
+		setMessages(chat.messages.filter((message) => message !== ''));
+		// }
 		setChatId(chat._id);
 	}
 	return (

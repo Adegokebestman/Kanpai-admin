@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
+import moment from 'moment';
 import { useEffect, useRef } from 'react';
 
 const MessageBox = ({ ownerId, message }) => {
 	const messageRef = useRef(null);
+	const formattedDate = moment(message.time).format('HH:mm:ss');
 
 	useEffect(() => {
 		messageRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -22,7 +24,7 @@ const MessageBox = ({ ownerId, message }) => {
 					myChatId !== ownerId ? 'self-start' : 'self-end'
 				}`}
 			>
-				date
+				{formattedDate}
 			</span>
 			<div
 				className={` p-2 rounded-xl ${

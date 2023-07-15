@@ -5,7 +5,7 @@ import MessagesContainer from './MessagesContainer';
 
 const MessageArea = ({ action }) => {
 	return (
-		<section className='hidden border border-gray-200 rounded-2xl bg-white w-full flex-1 h-full overflow-hidden relative'>
+		<section className='border border-gray-200 rounded-2xl bg-white w-full flex-1 h-full overflow-hidden relative'>
 			<MessageAreaHeader />
 			<MessagesContainer />
 			<MessageAreaInput action={action} />
