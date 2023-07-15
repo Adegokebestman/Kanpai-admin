@@ -14,7 +14,7 @@ export const ChatProvider = ({ children }) => {
 	const [userToChat, setUserToChat] = useState(defaultChatState);
 	const [messages, setMessages] = useState();
 	const [chatId, setChatId] = useState('');
-
+	const [refetch, setRefetch] = useState(false);
 	const [waitingList, setWaitingList] = useState([]);
 
 	const updateChat = (value) => {

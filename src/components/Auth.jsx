@@ -7,7 +7,7 @@ import ChatContext from '../context/ChatContext';
 
 const Auth = ({ children }) => {
 	const token = sessionStorage.getItem('token');
-	const { setWaitingList } = useContext(ChatContext);
+	const { setWaitingList, refetch, setRefetch } = useContext(ChatContext);
 
 	useEffect(() => {
 		socket.emit('get-livechat-waitlist', token);
@@ -18,11 +18,13 @@ const Auth = ({ children }) => {
 		socket.on('receive-waitlist', (waitList) => {
 			setWaitingList(waitList);
 			console.log(waitList);
+							setRefetch((prev) => !prev);
+
 		});
 		socket.on('error', (error) => {
 			console.log('Error:', error);
 		});
-	}, [setWaitingList, token]);
+	}, [token, refetch]);
 
 	if (!token) {
 		return <Navigate to='/auth' replace />;
