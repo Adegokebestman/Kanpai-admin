@@ -33,6 +33,8 @@ export const ChatProvider = ({ children }) => {
 				messages,
 				chatId,
 				waitingList,
+				refetch,
+				setRefetch,
 				setWaitingList,
 				setChatId,
 				setMessages,
