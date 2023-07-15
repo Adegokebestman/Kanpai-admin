@@ -18,8 +18,7 @@ const Auth = ({ children }) => {
 		socket.on('receive-waitlist', (waitList) => {
 			setWaitingList(waitList);
 			console.log(waitList);
-							setRefetch((prev) => !prev);
-
+			setRefetch((prev) => !prev);
 		});
 		socket.on('error', (error) => {
 			console.log('Error:', error);
