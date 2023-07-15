@@ -5,35 +5,25 @@ import ChatContext from '../context/ChatContext';
 import { getUserDetails, socket } from '../lib/apiEndPoints';
 
 const UserContactChat = ({ chat }) => {
-	const {
-		updateChat,
-		setMessages,
-		setChatId,
-		chatId,
-		setWaitingList,
-		waitingList,
-	} = useContext(ChatContext);
+	const { updateChat, setMessages, setChatId } = useContext(ChatContext);
 	const [user, setUser] = useState();
-	const [lastMessage, setLastMessage] = useState();
 
 	useEffect(() => {
-		setLastMessage(chat.messages[chat.messages.length - 1]);
 		async function fetch() {
 			const data = await getUserDetails(chat.user);
 			setUser(data.userInfo);
 		}
 		fetch();
 		socket.on('receive-message', (message) => {
-			socket.on('receive-waitlist', (waitList) => {
-				setWaitingList(waitList);
-				console.log(waitList);
-			});
-			if (chatId) {
-				setMessages(message.messages);
-				console.log('added');
+			if (message) {
+				setMessages(
+					message.messages.filter(
+						(message) => message.message !== ' '
+					)
+				);
 			}
 		});
-	}, [chat.messages, chat.user, chatId, updateChat]);
+	}, [chat.user, setMessages, updateChat]);
 
 	function handleClick() {
 		// fetch messages
@@ -41,11 +31,7 @@ const UserContactChat = ({ chat }) => {
 		//? Response: setMessages(response);
 		// After the response, // Todo: updateChat with users' object
 		updateChat(user);
-		// if (chatId) {
-		// 	setMessages(recentMessage.filter((message) => message !== ''));
-		// } else {
-		setMessages(chat.messages.filter((message) => message !== ''));
-		// }
+		setMessages(chat.messages.filter((message) => message !== '' || ' '));
 		setChatId(chat._id);
 	}
 	return (
@@ -61,15 +47,21 @@ const UserContactChat = ({ chat }) => {
 							imgSrc={user.photo}
 						/>
 					</div>
-					<div className='flex flex-col items-start justify-between max-w-[190px]'>
+					<div className='flex flex-col flex-1 items-start justify-between max-w-[190px]'>
 						<h3 className='text-base sm:text-lg font-bold font-poppins text-ellipsis whitespace-nowrap overflow-hidden w-full capitalize'>
 							{user.name}
 						</h3>
-						<p className='text-ellipsis whitespace-nowrap overflow-hidden w-full text-sm sm:text-base'>
+						{/* <p className='text-ellipsis whitespace-nowrap overflow-hidden w-full text-sm sm:text-base'>
 							{lastMessage && lastMessage.message}
-						</p>
+							{!lastMessage ||
+								(lastMessage == '' && (
+									<p className='text-primary-700'>
+										New Message
+									</p>
+								))}
+						</p> */}
 					</div>
-					<div className='self-start text-sm sm:text-base'>date</div>
+					{/* <div className='self-start text-sm sm:text-base'>date</div> */}
 				</article>
 			)}
 		</>

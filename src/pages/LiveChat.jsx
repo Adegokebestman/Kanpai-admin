@@ -1,6 +1,5 @@
 import MessageArea from '../components/MessageArea';
 import ChatSidebar from '../components/ChatSidebar';
-// import { io } from 'socket.io-client';
 
 const LiveChat = () => {
 	return (

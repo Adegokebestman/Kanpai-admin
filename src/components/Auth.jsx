@@ -10,19 +10,19 @@ const Auth = ({ children }) => {
 	const { setWaitingList } = useContext(ChatContext);
 
 	useEffect(() => {
+		socket.emit('get-livechat-waitlist', token);
 		socket.on('connect', () => {
-			console.log('connected to ' + socket.id);
+			// console.log('connected to ' + socket.id);
 		});
 
 		socket.on('receive-waitlist', (waitList) => {
 			setWaitingList(waitList);
+			console.log(waitList);
 		});
-
-		// return () => {
-		// 	socket.disconnect();
-		// 	console.log('disconnected')
-		// };
-	}, []);
+		socket.on('error', (error) => {
+			console.log('Error:', error);
+		});
+	}, [setWaitingList, token]);
 
 	if (!token) {
 		return <Navigate to='/auth' replace />;

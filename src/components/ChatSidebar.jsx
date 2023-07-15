@@ -1,27 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import InputFilter from './InputFilter';
 import UserContactChat from './UserContactChat';
 import ChatContext from '../context/ChatContext';
-import { socket } from '../lib/apiEndPoints';
 
 const ChatSidebar = () => {
-	const { userToChat, waitingList, setWaitingList } = useContext(ChatContext);
-
-	const token = sessionStorage.getItem('token');
-
-	useEffect(() => {
-		socket.emit('get-livechat-waitlist', token);
-
-		socket.on('receive-waitlist', (waitList) => {
-			setWaitingList(waitList);
-			console.log(waitList);
-		});
-
-		socket.on('error', (error) => {
-			console.log('Error:', error);
-		});
-	}, [setWaitingList, token]);
+	const { userToChat, waitingList } = useContext(ChatContext);
 
 	return (
 		<section
