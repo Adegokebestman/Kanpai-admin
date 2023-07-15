@@ -5,7 +5,7 @@ import ChatContext from '../context/ChatContext';
 import { getUserDetails, socket } from '../lib/apiEndPoints';
 
 const UserContactChat = ({ chat }) => {
-	const { updateChat, setMessages, setChatId } = useContext(ChatContext);
+	const { updateChat,messages, setMessages, setChatId } = useContext(ChatContext);
 	const [user, setUser] = useState();
 
 	useEffect(() => {
@@ -31,7 +31,7 @@ const UserContactChat = ({ chat }) => {
 		//? Response: setMessages(response);
 		// After the response, // Todo: updateChat with users' object
 		updateChat(user);
-		setMessages(chat.messages.filter((message) => message !== '' || ' '));
+		setMessages(messages.filter((message) => message !== '' || ' '));
 		setChatId(chat._id);
 	}
 	return (
