@@ -7,9 +7,14 @@ const MessagesContainer = () => {
 	const { messages } = useContext(ChatContext);
 	return (
 		<section className='flex flex-col justify-normal gap-2 w-full px-2 md:px-4 pt-3 overflow-y-auto  h-[calc(100vh-220px)] md:h-[calc(100vh-250px)]'>
-			{messages.map((message) => (
-				<MessageBox key={message} ownerId={message} />
-			))}
+			{messages &&
+				messages.map((message) => (
+					<MessageBox
+						key={message._id}
+						ownerId={message.sender}
+						message={message.message}
+					/>
+				))}
 		</section>
 	);
 };

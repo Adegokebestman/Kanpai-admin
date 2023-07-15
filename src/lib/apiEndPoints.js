@@ -1,5 +1,5 @@
 import axios from 'axios';
-// Token
+import { io } from 'socket.io-client';
 
 const instance = axios.create({
 	baseURL: 'https://kanpainode-b83dbacd8a19.herokuapp.com/',
@@ -13,6 +13,10 @@ instance.interceptors.request.use((config) => {
 	}
 	return config;
 });
+
+export const socket = io.connect(
+	'https://kanpainode-b83dbacd8a19.herokuapp.com'
+);
 
 const reports = async (method, url, data, id) => {
 	let fullUrl = !id ? url : url + `/${id}`;
@@ -235,21 +239,26 @@ export async function getSupplierInventory(supplierId) {
 
 //	Payments
 const PAYMENT_REQUESTS = 'admin/payments/getPaymentRequests';
-const ACCEPTED_ORDERS = 'admin/payments/getAcceptedOrders';
-const APPROVER_PAYMENT = 'admin/payments/approvePayment';
+const PAID_REQUEST = 'admin/payments/getApprovedPayments';
+const REJECTED_REQUEST = 'admin/payments/getDeclinedPayments';
+const APPROVE_PAYMENT = 'admin/payments/approvePayment';
 const DECLINE_PAYMENT = 'admin/payments/declinePayment';
 
 export async function getPaymentRequests() {
 	//used
 	return await reports('', PAYMENT_REQUESTS);
 }
-export async function getAcceptedOrders() {
+export async function getApprovedPayments() {
 	//used
-	return await reports('', ACCEPTED_ORDERS);
+	return await reports('', PAID_REQUEST);
+}
+export async function getDeclinedPayments() {
+	//used
+	return await reports('', REJECTED_REQUEST);
 }
 export async function approvePayment(id) {
 	//used
-	return await reports('post', APPROVER_PAYMENT, { id });
+	return await reports('post', APPROVE_PAYMENT, { id });
 }
 export async function declinePayment(id) {
 	//used

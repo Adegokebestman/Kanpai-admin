@@ -2,8 +2,6 @@ import { NavLink } from 'react-router-dom';
 import EditIcon from '../components/icons/editIcon.svg?component';
 import DeleteIcon from '../components/icons/deleteIcon.svg?component';
 
-
-
 export const filterActivities = [
 	{
 		tag: 'All Activities',
@@ -81,14 +79,28 @@ export const sellersTags = [
 		url: 'inventory',
 	},
 ];
+export const paymentTags = [
+	{
+		title: 'Requested Payments',
+		url: '/payments',
+	},
+	{
+		title: 'Approved Payments',
+		url: 'accepted',
+	},
+	{
+		title: 'Declined Payments',
+		url: 'declined',
+	},
+];
 
 // list of buyers
 export function buyerList(user) {
-	const handleDeleteClick = (id) =>{
-			console.log({id})
+	const handleDeleteClick = (id) => {
+		console.log({ id });
 	};
-	const handleEditClick = (id) =>{
-		console.log({id})
+	const handleEditClick = (id) => {
+		console.log({ id });
 	};
 	const columns = [
 		{
@@ -101,7 +113,6 @@ export function buyerList(user) {
 						className='max-w-full min-w-full'
 					/>
 				</div>
-
 			),
 			center: true,
 		},
@@ -109,19 +120,18 @@ export function buyerList(user) {
 			name: '',
 			selector: (row) => (
 				<NavLink to={`${row.id.toString()}`}>
-				<h1 className='text-xl'>{row.buyersName}</h1>
-			<p className='text-gray-700'> {row.email} </p>
-			</NavLink>
-			)
+					<h1 className='text-xl'>{row.buyersName}</h1>
+					<p className='text-gray-700'> {row.email} </p>
+				</NavLink>
+			),
 		},
 		{
 			name: '',
 			selector: (row) => (
-
 				<div className='px-4 py-2 '>
 					<h1 className='text-xl'>{row.date} </h1>
 					<p className='text-gray-700'>subscribed date</p>
-					</div>
+				</div>
 			),
 			sortable: true,
 		},
@@ -129,19 +139,8 @@ export function buyerList(user) {
 			name: '',
 			selector: (row) => (
 				<div className='px-4 py-2 '>
-				<h1 className='text-xl'>{row.phone} </h1>
-			<p  className='text-gray-700'> Phone no </p>
-			</div>
-			)
-		},
-
-		{
-			name: '',
-			selector: (row) => (
-				<div
-					className=' px-4 py-2 rounded-full block capitalize'
-				>
-					<EditIcon onClick={() => handleEditClick(row.id)}/>
+					<h1 className='text-xl'>{row.phone} </h1>
+					<p className='text-gray-700'> Phone no </p>
 				</div>
 			),
 		},
@@ -149,9 +148,16 @@ export function buyerList(user) {
 		{
 			name: '',
 			selector: (row) => (
-				<div
-					className=' px-4 py-2 rounded-full block capitalize'
-				>
+				<div className=' px-4 py-2 rounded-full block capitalize'>
+					<EditIcon onClick={() => handleEditClick(row.id)} />
+				</div>
+			),
+		},
+
+		{
+			name: '',
+			selector: (row) => (
+				<div className=' px-4 py-2 rounded-full block capitalize'>
 					<DeleteIcon onClick={() => handleDeleteClick(row.id)} />
 				</div>
 			),
@@ -184,9 +190,7 @@ export function buyerList(user) {
 	return { columns, dataArray };
 }
 
-
 export function tableData(user) {
-
 	const columns = [
 		{
 			name: '',

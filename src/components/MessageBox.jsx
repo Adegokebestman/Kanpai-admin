@@ -1,15 +1,17 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect, useRef } from 'react';
-import ChatContext from '../context/ChatContext';
+import moment from 'moment';
+import { useEffect, useRef } from 'react';
 
-const MessageBox = ({ ownerId = 'myId' }) => {
+const MessageBox = ({ ownerId, message }) => {
 	const messageRef = useRef(null);
+	const formattedDate = moment(message.time).format('HH:mm:ss');
 
 	useEffect(() => {
 		messageRef.current?.scrollIntoView({ behavior: 'smooth' });
 	}, []);
 
-	const { myChatId } = useContext(ChatContext);
+	const { id: myChatId } = JSON.parse(sessionStorage.getItem('data'));
+
 	return (
 		<article
 			ref={messageRef}
@@ -22,7 +24,7 @@ const MessageBox = ({ ownerId = 'myId' }) => {
 					myChatId !== ownerId ? 'self-start' : 'self-end'
 				}`}
 			>
-				date
+				{formattedDate}
 			</span>
 			<div
 				className={` p-2 rounded-xl ${
@@ -31,11 +33,7 @@ const MessageBox = ({ ownerId = 'myId' }) => {
 						: 'bg-gray-200 rounded-bl-none'
 				}`}
 			>
-				<p>
-					some messages from the user and allab fbdadba dkjabfjabfj
-					jadbfjabwjbfa afbdjbfa ajbfdkjb anm dfabwgfr e fna
-					dfbijabfde abjd
-				</p>
+				<p>{message}</p>
 			</div>
 		</article>
 	);

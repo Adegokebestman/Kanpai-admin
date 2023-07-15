@@ -1,12 +1,21 @@
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useContext, useState } from 'react';
 import { AiOutlineSend } from 'react-icons/ai';
+import ChatContext from '../context/ChatContext';
+import { socket } from '../lib/apiEndPoints';
 
 const MessageAreaInput = () => {
 	const [inputText, setInputText] = useState('');
+	const { chatId } = useContext(ChatContext);
+	const token = sessionStorage.getItem('token');
+
 	function handleSubmit(e) {
 		e.preventDefault();
-		alert('submitted');
+		socket.emit('send-message', token, inputText, chatId);
+
+		setInputText('');
 	}
+
 	return (
 		<form
 			className='flex items-center w-full pb-2 gap-5 h-[50px] relative px-2 sm:px-5'

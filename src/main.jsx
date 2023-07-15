@@ -21,6 +21,7 @@ import RecycleLayout from './layouts/RecycleLayout';
 import BuyersLayout from './layouts/BuyersLayout';
 import SellersLayout from './layouts/SellersLayout';
 import TruckDriversLayout from './layouts/TruckDriversLayout';
+import PaymentsLayout from './layouts/PaymentsLayout';
 
 import Login from './pages/Login';
 import Otp_Verification from './pages/Otp_Verification';
@@ -32,7 +33,6 @@ import TruckDriver from './pages/TruckDriver';
 import UsersReports from './pages/UsersReports';
 import ProductReports from './pages/ProductReports';
 import Payments from './pages/Payments';
-import PaymentDetails from './pages/PaymentDetails';
 import Analytics from './pages/Analytics';
 import ProductReportDetail from './pages/ProductReportDetail';
 import UserReportDetail from './pages/UserReportDetail';
@@ -49,6 +49,8 @@ import DriverActivities from './pages/DriverActivities';
 import { ChatProvider } from './context/ChatContext';
 import { AuthProvider } from './context/AuthContext';
 import { OtherProvider } from './context/OtherContext';
+import PaymentApproved from './pages/PaymentApproved';
+import PaymentDeclined from './pages/PaymentDeclined';
 import Auth from './components/Auth';
 
 const router = createBrowserRouter(
@@ -249,22 +251,32 @@ const router = createBrowserRouter(
 						</Auth>
 					}
 				/>
-				<Route
-					path='payments'
-					element={
-						<Auth>
-							<Payments />
-						</Auth>
-					}
-				/>
-				<Route
-					path='payments/:id'
-					element={
-						<Auth>
-							<PaymentDetails />
-						</Auth>
-					}
-				/>
+				<Route path='payments' element={<PaymentsLayout />}>
+					<Route
+						index
+						element={
+							<Auth>
+								<Payments />
+							</Auth>
+						}
+					/>
+					<Route
+						path='accepted'
+						element={
+							<Auth>
+								<PaymentApproved />
+							</Auth>
+						}
+					/>
+					<Route
+						path='declined'
+						element={
+							<Auth>
+								<PaymentDeclined />
+							</Auth>
+						}
+					/>
+				</Route>
 				<Route
 					path='analytics'
 					element={
